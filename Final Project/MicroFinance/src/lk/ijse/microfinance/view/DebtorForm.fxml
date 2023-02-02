@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="ancDebtor" prefHeight="622.0" prefWidth="1075.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.microfinance.controller.DebtorFormController">
+   <children>
+      <ImageView fitHeight="630.0" fitWidth="1075.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/logo/MainAnchorPane.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="43.0" prefHeight="59.0" prefWidth="292.0" text="Register New Debtor">
+         <font>
+            <Font name="ArnoPro-BoldCaption" size="25.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtName" labelFloat="true" layoutX="71.0" layoutY="177.0" onKeyReleased="#txtNameKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Name" />
+      <JFXTextField fx:id="txtAddress" labelFloat="true" layoutX="71.0" layoutY="235.0" onKeyReleased="#txtAddressKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Address" />
+      <JFXTextField fx:id="txtNIC" labelFloat="true" layoutX="71.0" layoutY="293.0" onKeyReleased="#txtNicKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="NIC " />
+      <JFXTextField fx:id="txtTelephone" labelFloat="true" layoutX="71.0" layoutY="405.0" onKeyReleased="#txtTelephoneKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Telephone" />
+      <Label layoutX="67.0" layoutY="73.0" prefHeight="25.0" prefWidth="154.0">
+         <font>
+            <Font name="ArnoPro-BoldCaption" size="18.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnRegisterID" layoutX="67.0" layoutY="518.0" onAction="#btnRegisterOnAction" prefHeight="35.0" prefWidth="268.0" style="-fx-background-color: #9be39b,        linear-gradient(#d6d6d6 50%, white 100%),        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%); -fx-background-radius: 30; -fx-background-insets: 1,2,2; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );" text="Register">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnNewRegisterID" layoutX="67.0" layoutY="479.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="268.0" style="-fx-background-color: #9be39b,        linear-gradient(#d6d6d6 50%, white 100%),        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%); -fx-background-radius: 30; -fx-background-insets: 1,2,2; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );" text="+New Register">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="67.0" layoutY="557.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="268.0" style="-fx-background-color: #9be39b,        linear-gradient(#d6d6d6 50%, white 100%),        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%); -fx-background-radius: 30; -fx-background-insets: 1,2,2; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );" text="Delete ">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Line endX="213.0" layoutX="168.0" layoutY="53.0" startX="-139.5" startY="-0.5" />
+      <Line endX="197.0" endY="-29.0" layoutX="184.0" layoutY="83.0" startX="197.0" startY="524.0" />
+      <Line endX="213.0" layoutX="168.0" layoutY="608.0" startX="-139.0" />
+      <Line endX="197.0" endY="-30.0" layoutX="-169.0" layoutY="83.0" startX="197.0" startY="525.0" />
+      <JFXTextField fx:id="txtLoanAmount" labelFloat="true" layoutX="71.0" layoutY="352.0" onKeyReleased="#txtLoanAmountKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Loan Amount" />
+      <TableView fx:id="tblDebtor" layoutX="404.0" layoutY="310.0" prefHeight="300.0" prefWidth="651.0">
+        <columns>
+          <TableColumn fx:id="collDebtorID" minWidth="1.0" prefWidth="67.0" text="Debtor ID" />
+            <TableColumn fx:id="collName" minWidth="1.0" prefWidth="91.0" text="Name" />
+            <TableColumn fx:id="collAddress" minWidth="1.0" prefWidth="111.0" text="Address" />
+            <TableColumn fx:id="collNIC" minWidth="1.0" prefWidth="106.0" text="NIC" />
+            <TableColumn fx:id="collLoanAmount" minWidth="1.0" prefWidth="99.0" text="Loan Amount" />
+            <TableColumn fx:id="collTelephone" minWidth="1.0" prefWidth="88.0" text="Telephone" />
+            <TableColumn fx:id="collEmployeeID" minWidth="1.0" prefWidth="88.0" text="Employee ID" />
+        </columns>
+      </TableView>
+      <Label layoutX="664.0" layoutY="288.0" prefHeight="20.0" prefWidth="224.0" text="Already Registerd Debtor Table">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font></Label>
+      <JFXTextField fx:id="txtDebtorID" labelFloat="true" layoutX="70.0" layoutY="69.0" onKeyReleased="#txtDIdKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Debtor ID                                               *  ex - D001" />
+      <JFXTextField fx:id="txtSearch" labelFloat="true" layoutX="574.0" layoutY="68.0" prefHeight="25.0" prefWidth="466.0" promptText="Name, Address, Nic" />
+      <Label layoutX="442.0" layoutY="74.0" prefHeight="20.0" prefWidth="132.0" text="Search  Debtor- ">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <Line endX="488.0" endY="0.5" layoutX="571.0" layoutY="53.0" startX="-160.0" startY="-0.5" />
+      <Line endX="483.0" endY="-1.4999847412109375" layoutX="576.0" layoutY="112.0" startX="-165.0" startY="-0.4999847412109375" />
+      <Line endX="-139.5" endY="-69.0" layoutX="550.0" layoutY="122.0" startX="-139.5" startY="-10.999984741210938" />
+      <Line endX="-139.5" endY="-69.0" layoutX="1199.0" layoutY="123.0" startX="-139.5" startY="-13.0" />
+      <Label fx:id="lblDebtorId" layoutX="211.0" layoutY="98.0" prefHeight="25.0" prefWidth="154.0" textFill="RED">
+         <font>
+            <Font name="ArnoPro-BoldCaption" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblName" layoutX="73.0" layoutY="205.0" prefHeight="25.0" prefWidth="268.0" textFill="RED">
+         <font>
+            <Font name="ArnoPro-BoldCaption" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblAddress" layoutX="73.0" layoutY="264.0" prefHeight="25.0" prefWidth="268.0" textFill="RED">
+         <font>
+            <Font name="ArnoPro-BoldCaption" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblNic" layoutX="73.0" layoutY="317.0" prefHeight="25.0" prefWidth="268.0" textFill="RED">
+         <font>
+            <Font name="ArnoPro-BoldCaption" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblLoanAmount" layoutX="72.0" layoutY="376.0" prefHeight="25.0" prefWidth="268.0" textFill="RED">
+         <font>
+            <Font name="ArnoPro-BoldCaption" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTelephone" layoutX="71.0" layoutY="430.0" prefHeight="25.0" prefWidth="268.0" textFill="RED">
+         <font>
+            <Font name="ArnoPro-BoldCaption" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblDId" layoutX="71.0" layoutY="95.0" prefHeight="25.0" prefWidth="268.0" textFill="RED">
+         <font>
+            <Font name="ArnoPro-BoldCaption" size="12.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtEmployeeID" labelFloat="true" layoutX="70.0" layoutY="122.0" onKeyReleased="#txtEmIdKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Employee ID                                            *ex - E001" />
+      <Label fx:id="lblEmployeeID" layoutX="71.0" layoutY="148.0" prefHeight="25.0" prefWidth="268.0" textFill="RED">
+         <font>
+            <Font name="ArnoPro-BoldCaption" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

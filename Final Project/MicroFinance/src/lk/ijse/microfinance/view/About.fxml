@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="ancAbout" prefHeight="622.0" prefWidth="1075.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.microfinance.controller.AboutController">
+    <children>
+        <ImageView fitHeight="622.0" fitWidth="1124.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../assets/logo/MainAnchorPane.png" />
+            </image>
+        </ImageView>
+      <Label layoutX="311.0" layoutY="147.0" prefHeight="68.0" prefWidth="492.0" text="GAGANA INVESTMENT MICRO FINANCE ">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="428.0" layoutY="181.0" prefHeight="68.0" prefWidth="225.0" text="COMPANY SYSTEM">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="320.0" layoutY="248.0" prefHeight="68.0" prefWidth="483.0" text="Micro credit organizations are facing many challenges,">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="386.0" layoutY="274.0" prefHeight="68.0" prefWidth="326.0" text="among which efficiency is a problem.">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="438.0" layoutY="308.0" prefHeight="50.0" prefWidth="238.0" text="SHADOW TECHNOLOGY " textFill="#cd3838">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="320.0" layoutY="345.0" prefHeight="27.0" prefWidth="483.0" text="Supporting technology has to emerge to help solve the">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="331.0" layoutY="372.0" prefHeight="27.0" prefWidth="437.0" text="performance difficulties encountered. It is easy to">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="316.0" layoutY="392.0" prefHeight="36.0" prefWidth="492.0" text=" generate Debtor details, Reports, Employee details etc..">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="253.0" layoutY="449.0" prefHeight="68.0" prefWidth="90.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="377.0" layoutY="457.0" prefHeight="14.0" prefWidth="371.0" text="This Software made for final project of IJSE 64 Batch">
+         <font>
+            <Font name="System Italic" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="424.0" layoutY="575.0" prefHeight="27.0" prefWidth="114.0" text="Contact us -">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="68.0" fitWidth="90.0" layoutX="393.0" layoutY="491.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/logo/facebook.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="78.0" fitWidth="82.0" layoutX="479.0" layoutY="488.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/logo/instagram.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="68.0" fitWidth="78.0" layoutX="571.0" layoutY="491.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/logo/youtube.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="68.0" fitWidth="78.0" layoutX="657.0" layoutY="493.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/logo/twitter.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="526.0" layoutY="576.0" prefHeight="21.0" prefWidth="186.0" text="Shadow Technology ">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <Line endX="237.0" layoutX="506.0" layoutY="481.0" startX="-136.5" startY="-0.5" />
+      <Line endX="239.5" endY="-0.5" layoutX="504.0" layoutY="573.0" startX="-135.0" />
+      <Line endX="-147.0" endY="81.0" layoutX="517.0" layoutY="492.0" startX="-147.0" startY="-10.0" />
+      <Line endX="-147.0" endY="81.0" layoutX="891.0" layoutY="492.0" startX="-147.0" startY="-10.0" />
+    </children>
+</AnchorPane>

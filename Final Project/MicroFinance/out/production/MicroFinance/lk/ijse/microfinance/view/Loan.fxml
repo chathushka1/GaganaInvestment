@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="ancLoan" prefHeight="622.0" prefWidth="1075.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.microfinance.controller.LoanController">
+    <children>
+        <ImageView fitHeight="630.0" fitWidth="1075.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../assets/logo/MainAnchorPane.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="43.0" prefHeight="59.0" prefWidth="292.0" text="Loan">
+            <font>
+                <Font name="ArnoPro-BoldCaption" size="25.0" />
+            </font>
+        </Label>
+        <JFXTextField fx:id="txtLoanAmount" labelFloat="true" layoutX="68.0" layoutY="191.0" onKeyReleased="#txtAmountKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Amount" />
+        <Line endX="212.0" endY="-0.49999237060546875" layoutX="168.0" layoutY="53.0" startX="-139.5" startY="-0.5" />
+        <Line endX="197.0" endY="-29.0" layoutX="183.0" layoutY="83.0" startX="197.0" startY="524.0" />
+        <Line endX="212.0" layoutX="168.0" layoutY="608.0" startX="-139.0" />
+        <Line endX="197.0" endY="-30.0" layoutX="-169.0" layoutY="83.0" startX="197.0" startY="525.0" />
+        <JFXTextField fx:id="txtPeriod" labelFloat="true" layoutX="67.0" layoutY="248.0" onKeyReleased="#txtPeriodKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Period" />
+        <JFXButton layoutX="90.0" layoutY="511.0" onAction="#btnSaveOnAction" prefHeight="39.0" prefWidth="223.0" style="-fx-background-color: #9be39b,        linear-gradient(#d6d6d6 50%, white 100%),        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%); -fx-background-radius: 30; -fx-background-insets: 1,2,2; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );" text="Save ">
+            <font>
+                <Font size="18.0" />
+            </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+        </JFXButton>
+      <Label layoutX="67.0" layoutY="410.0" prefHeight="48.0" prefWidth="124.0" text="Percentage -">
+         <font>
+            <Font name="ArnoPro-Caption" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="67.0" layoutY="465.0" prefHeight="35.0" prefWidth="154.0" text="Monthly Premium -">
+         <font>
+            <Font name="ArnoPro-Caption" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblMonthlyPremium" layoutX="273.0" layoutY="465.0" prefHeight="35.0" prefWidth="72.0">
+         <font>
+            <Font name="ArnoPro-BoldCaption" size="18.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtDueDate" labelFloat="true" layoutX="69.0" layoutY="368.0" prefHeight="25.0" prefWidth="268.0" promptText="Deu Date " />
+      <JFXButton layoutX="89.0" layoutY="559.0" onAction="#btnUpdateOnAction" prefHeight="39.0" prefWidth="223.0" style="-fx-background-color: #9be39b,        linear-gradient(#d6d6d6 50%, white 100%),        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%); -fx-background-radius: 30; -fx-background-insets: 1,2,2; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );" text="Update">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXTextField fx:id="txtLoanID" labelFloat="true" layoutX="67.0" layoutY="82.0" onKeyReleased="#txtlIdKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Loan ID                                                    * ex - L001" />
+      <JFXTextField fx:id="txtDebtorID" labelFloat="true" layoutX="67.0" layoutY="135.0" onKeyReleased="#txtDebtorIdKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Debtor ID                                                * ex - D001" />
+      <JFXTextField fx:id="txtDate" labelFloat="true" layoutX="69.0" layoutY="315.0" prefHeight="25.0" prefWidth="268.0" promptText="Date " />
+      <TableView fx:id="tblLoan" layoutX="410.0" layoutY="308.0" prefHeight="300.0" prefWidth="651.0">
+         <columns>
+            <TableColumn fx:id="collLoanID" minWidth="1.0" prefWidth="75.0" text="Loan ID" />
+            <TableColumn fx:id="collDebtorID" minWidth="1.0" prefWidth="73.0" text="Debtor ID" />
+            <TableColumn fx:id="collAmount" minWidth="1.0" prefWidth="102.0" text="Amount" />
+            <TableColumn fx:id="collPeriod" minWidth="1.0" prefWidth="71.0" text="Period" />
+            <TableColumn fx:id="collDate" minWidth="1.0" prefWidth="76.0" text="Date" />
+            <TableColumn fx:id="collDeuDate" minWidth="0.0" prefWidth="74.0" text="Deu Date" />
+            <TableColumn fx:id="collPercentage" minWidth="0.0" prefWidth="69.0" text="Percentage" />
+            <TableColumn fx:id="collMonthlyPremium" minWidth="0.0" prefWidth="110.0" text="Monthly Premium" />
+         </columns>
+      </TableView>
+      <Label layoutX="670.0" layoutY="284.0" prefHeight="20.0" prefWidth="224.0" text="Already Registerd Loan Table">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtPercentage" layoutX="190.0" layoutY="422.0" onAction="#txtPercentageOnAction" prefHeight="25.0" prefWidth="147.0" />
+      <JFXTextField fx:id="txtMonthlyPremium" layoutX="190.0" layoutY="470.0" prefHeight="25.0" prefWidth="147.0" />
+      <JFXTextField fx:id="txtSearch" labelFloat="true" layoutX="582.0" layoutY="73.0" prefHeight="25.0" prefWidth="466.0" promptText="Loan ID" />
+      <Label layoutX="442.0" layoutY="75.0" prefHeight="20.0" prefWidth="132.0" text="Search  Loan -">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <Line endX="488.0" endY="0.5" layoutX="571.0" layoutY="54.0" startX="-160.0" startY="-0.5" />
+      <Line endX="483.0" endY="-1.4999847412109375" layoutX="576.0" layoutY="113.0" startX="-165.0" startY="-0.4999847412109375" />
+      <Line endX="-139.5" endY="-69.0" layoutX="550.0" layoutY="123.0" startX="-139.5" startY="-10.999984741210938" />
+      <Line endX="-139.5" endY="-69.0" layoutX="1199.0" layoutY="124.0" startX="-139.5" startY="-13.0" />
+      <Label fx:id="lblLoanId" layoutX="68.0" layoutY="107.0" prefHeight="25.0" prefWidth="268.0" textFill="#f20404">
+         <font>
+            <Font name="ArnoPro-Caption" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblDebtorId" layoutX="68.0" layoutY="160.0" prefHeight="25.0" prefWidth="268.0" textFill="RED">
+         <font>
+            <Font name="ArnoPro-Caption" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblAmount" layoutX="71.0" layoutY="216.0" prefHeight="25.0" prefWidth="268.0" textFill="#f80000">
+         <font>
+            <Font name="ArnoPro-Caption" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPeriod" layoutX="68.0" layoutY="273.0" prefHeight="25.0" prefWidth="268.0" textFill="#ff0f0f">
+         <font>
+            <Font name="ArnoPro-Caption" size="14.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>
