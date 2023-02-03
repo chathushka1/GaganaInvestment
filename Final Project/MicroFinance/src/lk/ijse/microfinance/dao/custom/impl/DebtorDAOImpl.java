@@ -55,7 +55,7 @@ public class DebtorDAOImpl implements DebtorDAO {
 
     @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("DELETE FROM Debtor WHERE dID =? ",id);
+        return SQLUtil.execute("DELETE FROM Debtor WHERE dID = ? ",id);
     }
 
     @Override
