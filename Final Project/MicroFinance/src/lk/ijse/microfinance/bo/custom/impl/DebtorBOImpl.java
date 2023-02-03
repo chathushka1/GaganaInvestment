@@ -4,7 +4,6 @@ import lk.ijse.microfinance.bo.custom.DebtorBO;
 import lk.ijse.microfinance.dao.DAOFactory;
 import lk.ijse.microfinance.dao.custom.DebtorDAO;
 import lk.ijse.microfinance.entity.Debtor;
-import lk.ijse.microfinance.model.DebtorModel;
 import lk.ijse.microfinance.to.DebtorDTO;
 
 import java.sql.SQLException;

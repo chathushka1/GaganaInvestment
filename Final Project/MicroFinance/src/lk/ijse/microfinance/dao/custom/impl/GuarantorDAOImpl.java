@@ -2,7 +2,6 @@ package lk.ijse.microfinance.dao.custom.impl;
 
 import lk.ijse.microfinance.dao.SQLUtil;
 import lk.ijse.microfinance.dao.custom.GuarantorDAO;
-import lk.ijse.microfinance.entity.Debtor;
 import lk.ijse.microfinance.entity.Guarantor;
 
 import java.sql.ResultSet;
