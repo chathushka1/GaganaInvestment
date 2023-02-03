@@ -14,7 +14,7 @@ public class DAOFactory {
         return daoFactory;
     }
     public enum DAOTypes{
-        DEBTOR
+        DEBTOR,EMPLOYEE,GUARANTEEITEM
     }
     public SuperDAO getDAO(DAOTypes daoTypes){
         switch (daoTypes){
