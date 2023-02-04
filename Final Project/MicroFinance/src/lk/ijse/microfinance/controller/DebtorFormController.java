@@ -18,6 +18,8 @@ import lk.ijse.microfinance.view.tm.DebtorAddTm;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,6 +51,7 @@ public class DebtorFormController {
     public Label lblEmployeeID;
     public JFXButton btnRegisterID;
     public JFXButton btnNewRegisterID;
+    public JFXButton btnDeleteId;
     private String searchText ="";
     private Matcher dIdMatcher;
     private Matcher emIdMatcher;
@@ -69,130 +72,80 @@ public class DebtorFormController {
         collTelephone.setCellValueFactory(new PropertyValueFactory<>("telephone"));
         collEmployeeID.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
 
+        initUI();
+        tblDebtor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            btnDeleteId.setDisable(newValue==null);
+            btnRegisterID.setText(newValue!=null?"update":"save");
+            btnRegisterID.setDisable(newValue==null);
 
-//        AddDebtorTbl(searchText);
-//        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-//            searchText=newValue;
-//            AddDebtorTbl(searchText);
-    //    });
-       //  setPattern();
+            if(newValue!=null){
+                txtDebtorID.setText(newValue.getId());
+                txtName.setText(newValue.getName());
+                txtAddress.setText(newValue.getAddress());
+                txtNIC.setText(newValue.getNic());
+                txtLoanAmount.setText(String.valueOf(newValue.getAmountDeu()));
+                txtTelephone.setText(newValue.getTelephone());
+                txtEmployeeID.setText(newValue.getEmployeeId());
 
-         /*try {
-            loadAllEmployee();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }*/
-
-    }
-   /* private void loadAllEmployee() throws SQLException, ClassNotFoundException {
-        for (Employee employee : EmployeeFormController.getAllEmployee()){
-            cmbEmployeeId.getItems().add(employee.geteID());
-
-        }
-
-    }*/
-
-    public void setPattern(){
-
-        Pattern userIdPattern = Pattern.compile("^(D0)([0-9]{1})([0-9]{1,})$");
-        dIdMatcher = userIdPattern.matcher(txtDebtorID.getText());
-
-        Pattern EmployeeIdPattern = Pattern.compile("^(E0)([0-9]{1})([0-9]{1,})$");
-        emIdMatcher = EmployeeIdPattern.matcher(txtEmployeeID.getText());
-
-        Pattern userNamePattern = Pattern.compile("^([a-zA-Z]{4,})$");
-        dNameMatcher = userNamePattern.matcher(txtName.getText());
-
-        Pattern userAddressPattern = Pattern.compile("^([a-zA-Z0-9]{4,})$");
-        dAddressMatcher = userAddressPattern.matcher(txtAddress.getText());
-
-        Pattern userContactPattern = Pattern.compile("^(?:7|0|(?:\\+94))[0-9]{9,10}$");
-        dTelephoneMatcher = userContactPattern.matcher(txtTelephone.getText());
-
-        Pattern amountPattern = Pattern.compile("^[0-9]{1,}$");
-        dAmountMatcher = amountPattern.matcher(txtLoanAmount.getText());
-
-        Pattern nicPattern = Pattern.compile("^[0-9]{10}[vVxX]$");
-        dNicMatcher = nicPattern.matcher(txtNIC.getText());
-    }
-   /* private void AddDebtorTbl(String text){
-        String searchText = "%"+text+"%";
-        try {
-            *//*ObservableList<DebtorAddTm> tmList = FXCollections.observableArrayList();
-
-            Connection connection = DBConnection.getInstance().getConnection();
-            String sql = "SELECT * FROM Debtor WHERE name LIKE ? || address LIKE ? || nic LIKE ?";
-            PreparedStatement statement =connection.prepareStatement(sql);
-            statement.setString(1,searchText);
-            statement.setString(2,searchText);
-            statement.setString(3,searchText);
-            ResultSet set = statement.executeQuery();*//*
-           *//* DebtorDAOImpl debtorDAO = new DebtorDAOImpl();
-            ArrayList<Debtor> allDebtor = debtorDAO.getAllDebtor();
-            for (Debtor debtor : allDebtor) {
-                tblDebtor.getItems().add(new DebtorAddTm(debtor.getdID(),debtor.getName(),debtor.getAddress(),debtor.getNic(),debtor.getAmountDeu(),debtor.getTelephone(),debtor.getEmployeeId()));
+                txtDebtorID.setDisable(false);
+                txtName.setDisable(false);
+                txtAddress.setDisable(false);
+                txtNIC.setDisable(false);
+                txtLoanAmount.setDisable(false);
+                txtTelephone.setDisable(false);
+                txtEmployeeID.setDisable(false);
 
             }
-*//*
+        });
 
-        }catch (ClassNotFoundException  e){
+        txtEmployeeID.setOnAction(event -> btnRegisterID.fire());
+        loadAllDebtor();
 
+    }
+    public void initUI(){
+
+        txtDebtorID.clear();
+        txtName.clear();
+        txtAddress.clear();
+        txtNIC.clear();
+        txtLoanAmount.clear();
+        txtTelephone.clear();
+        txtEmployeeID.clear();
+
+        txtDebtorID.setDisable(true);
+        txtName.setDisable(true);
+        txtAddress.setDisable(true);
+        txtNIC.setDisable(true);
+        txtLoanAmount.setDisable(true);
+        txtTelephone.setDisable(true);
+        txtEmployeeID.setDisable(true);
+
+        txtDebtorID.setEditable(false);
+        btnRegisterID.setDisable(true);
+        btnDeleteId.setDisable(true);
+
+    }
+    private void loadAllDebtor(){
+        try{
+            debtorBO.gelAllDebtor();
+            ArrayList<DebtorDTO> allDebtor = debtorBO.gelAllDebtor();
+            for(DebtorDTO dto : allDebtor){
+                tblDebtor.getItems().add(new DebtorAddTm(dto.getdID(),dto.getName(),dto.getAddress(),dto.getNic(),dto.getAmountDeu(),
+                                                         dto.getTelephone(),dto.getEmployeeId()));
+            }
+
+        }catch (SQLException e){
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
-    }*/
+    }
+
     public void btnClearOnAction(ActionEvent actionEvent) {
         ancDebtor.getChildren().clear();
     }
 
     public void btnRegisterOnAction(ActionEvent actionEvent) {
-//        DebtorDTO debtor = new DebtorDTO(
-//                txtDebtorID.getText(),
-//                txtName.getText(),
-//                txtAddress.getText(),
-//                txtNIC.getText(),
-//                Double.parseDouble(txtLoanAmount.getText()),
-//                txtTelephone.getText(),
-//                txtEmployeeID.getText());
-//        setPattern();
-        /*if(dIdMatcher.matches()) {
-            if (emIdMatcher.matches()){
-                 if(dNameMatcher.matches()) {
-                     if(dAddressMatcher.matches()) {
-                         if(dNicMatcher.matches()){
-                             if(dAmountMatcher.matches()){
-                                 if(dTelephoneMatcher.matches()) {
-
-
-                                 } else {
-                                    txtTelephone.requestFocus();
-                                    lblTelephone.setText("invalid Contact ");
-                                }
-                           }else{
-                                 txtLoanAmount.requestFocus();
-                                 lblLoanAmount.setText("invalid Amount ");
-                             }
-                         }else{
-                                 txtNIC.requestFocus();
-                                 lblNic.setText("invalid NIC");
-                             }
-
-                     } else {
-                         txtAddress.requestFocus();
-                         lblAddress.setText("invalid Address ");
-                      }
-                } else {
-                    txtName.requestFocus();
-                    lblName.setText("invalid Name ");
-                }
-            }else{
-                txtEmployeeID.requestFocus();
-                lblEmployeeID.setText("invalid ID ");
-            }
-        } else {
-            txtDebtorID.requestFocus();
-            lblDId.setText("invalid ID ");
-        }*/
          String dID = txtDebtorID.getText();
          String name =txtName.getText();
          String address = txtAddress.getText();
@@ -201,7 +154,30 @@ public class DebtorFormController {
          String telephone = txtTelephone.getText();
          String eID = txtEmployeeID.getText();
 
-         if(btnRegisterID.getText().equalsIgnoreCase("Registered")){
+
+
+        if (!name.matches(".*[a-zA-Z0-9]{4,}")) {
+            new Alert(Alert.AlertType.ERROR, "Invalid name").show();
+            txtName.requestFocus();
+//            txtName.setFocusColor(Paint.valueOf("Red"));
+            return;
+        } else if (!address.matches(".*[a-zA-Z0-9]{4,}")) {
+            new Alert(Alert.AlertType.ERROR, "Address should not ").show();
+            txtAddress.requestFocus();
+            return;
+        }else if(!txtNIC.getText().matches(".*[a-zA-Z0-9]{4,}")){
+            new Alert(Alert.AlertType.ERROR, "NIC should not ").show();
+            txtNIC.requestFocus();
+        }else if(!txtLoanAmount.getText().matches("^[0-9]+[.]?[0-9]*$")){
+            new Alert(Alert.AlertType.ERROR, "Amount should not ").show();
+            txtLoanAmount.requestFocus();
+        }else if (!telephone.matches(".*(?:7|0|(?:\\\\+94))[0-9]{9,10}")) {
+            new Alert(Alert.AlertType.ERROR, "Contact should be at long").show();
+            txtTelephone.requestFocus();
+            return;
+        }
+
+         if(btnRegisterID.getText().equalsIgnoreCase("Save Debtor")){
              try {
                  if(exitRegister(dID)){
                    new Alert(Alert.AlertType.ERROR,dID+"Allready Register").show();
@@ -230,8 +206,10 @@ public class DebtorFormController {
                  debtorAddTm.setAmountDeu(amountDue);
                  debtorAddTm.setTelephone(telephone);
                  debtorAddTm.setEmployeeId(eID);
+                 tblDebtor.refresh();
 
              }catch (SQLException e){} catch (ClassNotFoundException e) {
+                 e.printStackTrace();
                  new Alert(Alert.AlertType.ERROR,dID+"Failed").show();
                  e.printStackTrace();
              }
@@ -246,7 +224,25 @@ public class DebtorFormController {
 
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
+        txtDebtorID.setDisable(false);
+        txtName.setDisable(false);
+        txtAddress.setDisable(false);
+        txtNIC.setDisable(false);
+        txtLoanAmount.setDisable(false);
+        txtTelephone.setDisable(false);
+        txtEmployeeID.setDisable(false);
+
+        txtDebtorID.clear();
+        txtName.clear();
+        txtAddress.clear();
+        txtNIC.clear();
+        txtLoanAmount.clear();
+        txtTelephone.clear();
+        txtEmployeeID.clear();
+
         txtDebtorID.setText(genarateNewID());
+        btnRegisterID.setDisable(false);
+        btnRegisterID.setText("Save Debtor");
     }
 
     private String genarateNewID() {
@@ -261,22 +257,23 @@ public class DebtorFormController {
 
     }
     public void btnDeleteOnAction(ActionEvent actionEvent) {
-        String debtorId=txtDebtorID.getText();
+        String id = tblDebtor.getSelectionModel().getSelectedItem().getId();
 
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Are you sure DELETE ?",ButtonType.YES,ButtonType.NO);
+        Optional<ButtonType> buttonType = alert.showAndWait();
+        if (buttonType.get() == ButtonType.YES) {
+            try {
+                debtorBO.deleteDebtor(id);
+                tblDebtor.getItems().remove(tblDebtor.getSelectionModel().getSelectedItem());
+                tblDebtor.getSelectionModel().clearSelection();
+                initUI();
+            }catch (SQLException e){
 
-        try {
-            Connection connection = DBConnection.getInstance().getConnection();
-            String sql="DELETE FROM Debtor WHERE  dID=?";
-            PreparedStatement pre=connection.prepareStatement(sql);
-            pre.setObject(1, txtDebtorID.getText());
-            int executeUpdate = pre.executeUpdate();
-
-            if(executeUpdate>0){
-                new Alert(Alert.AlertType.CONFIRMATION," Deleted!").show();;
-//                AddDebtorTbl(searchText);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
         }
+
     }
 
     public void txtEmIdKeyTypeOnAction(KeyEvent keyEvent) {
@@ -284,23 +281,23 @@ public class DebtorFormController {
 
         Pattern EmployeeIdPattern = Pattern.compile("");
         emIdMatcher = EmployeeIdPattern.matcher(txtEmployeeID.getText());
-
-        /*if (!emIdMatcher.matches()) {
+/*
+        if (!emIdMatcher.matches()) {
             txtEmployeeID.requestFocus();
             lblEmployeeID.setText("invalid ID");
         }*/
     }
 
-    public void txtDIdKeyTypeOnAction(KeyEvent keyEvent) {
+  public void txtDIdKeyTypeOnAction(KeyEvent keyEvent) {
         lblDId.setText("");
 
         Pattern userIdPattern = Pattern.compile("");
         dIdMatcher = userIdPattern.matcher(txtDebtorID.getText());
 
-       /* if (!dIdMatcher.matches()) {
+      if (!dIdMatcher.matches()) {
             txtDebtorID.requestFocus();
             lblDId.setText("invalid ID");
-        }*/
+        }
     }
 
     public void txtNameKeyTypeOnAction(KeyEvent keyEvent) {

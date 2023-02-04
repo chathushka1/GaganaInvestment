@@ -1,6 +1,6 @@
 package lk.ijse.microfinance.dao;
 
-import lk.ijse.microfinance.dao.custom.impl.DebtorDAOImpl;
+import lk.ijse.microfinance.dao.custom.impl.*;
 
 public class DAOFactory {
     private static DAOFactory daoFactory;
@@ -20,6 +20,16 @@ public class DAOFactory {
         switch (daoTypes){
             case DEBTOR:
                 return new DebtorDAOImpl();
+            case EMPLOYEE:
+                return new EmployeeDAOImpl();
+            case GUARANTEEITEM:
+                return new GuaranteeItemDAOImpl();
+            case GUARANTOR:
+                return new GuarantorDAOImpl();
+            case LOAN:
+                return new LoanDAOImpl();
+            case PAYMENT:
+                return new PaymentDAOImpl();
         }
         return null;
     }
