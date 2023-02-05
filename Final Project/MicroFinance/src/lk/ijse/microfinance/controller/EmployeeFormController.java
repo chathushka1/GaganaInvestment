@@ -1,5 +1,6 @@
 package lk.ijse.microfinance.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,9 +12,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.microfinance.bo.BOFactory;
+import lk.ijse.microfinance.bo.custom.EmployeeBO;
 import lk.ijse.microfinance.db.DBConnection;
 import lk.ijse.microfinance.model.EmployeeModel;
+import lk.ijse.microfinance.to.DebtorDTO;
 import lk.ijse.microfinance.to.EmployeeDTO;
+import lk.ijse.microfinance.view.tm.DebtorAddTm;
 import lk.ijse.microfinance.view.tm.EmployeeAddTm;
 
 import java.sql.Connection;
@@ -46,6 +51,8 @@ public class EmployeeFormController {
     public Label lblNic;
     public Label lblPosition;
     public Label lblTelephone;
+    public JFXButton btnRegisterID;
+    public JFXButton btnNewRegisterId;
     private String searchText ="";
     private Matcher emIdMatcher;
     private Matcher emNameMatcher;
@@ -53,8 +60,10 @@ public class EmployeeFormController {
     private Matcher emNicMatcher;
     private Matcher emPositionMatcher;
     private Matcher emTelephoneMatcher;
+    EmployeeBO employeeBO = (EmployeeBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.EMPLOYEEBO);
 
     public void initialize(){
+
         collEmployeeID.setCellValueFactory(new PropertyValueFactory<>("id"));
         collName.setCellValueFactory(new PropertyValueFactory<>("name"));
         collAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
@@ -62,12 +71,12 @@ public class EmployeeFormController {
         collPosition.setCellValueFactory(new PropertyValueFactory<>("position"));
         collTelephone.setCellValueFactory(new PropertyValueFactory<>("telephone"));
 
-        AddEmployeeTbl(searchText);
+        /*AddEmployeeTbl(searchText);
         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
             searchText=newValue;
             AddEmployeeTbl(searchText);
         });
-
+*/
         setPattern();
      }
 
@@ -85,36 +94,18 @@ public class EmployeeFormController {
         emTelephoneMatcher = userContactPattern.matcher(txtTelephone.getText());
     }
 
-
-    private void AddEmployeeTbl(String text){
-        String searchText = "%"+text+"%";
+    private void loadAllEmployee(){
         try {
-            ObservableList<EmployeeAddTm> tmList = FXCollections.observableArrayList();
-
-            Connection connection = DBConnection.getInstance().getConnection();
-            String sql = "SELECT * FROM Employee WHERE eID LIKE ? || name LIKE ? || address LIKE ? || nic LIKE ?";
-            PreparedStatement statement =connection.prepareStatement(sql);
-            statement.setString(1,searchText);
-            statement.setString(2,searchText);
-            statement.setString(3,searchText);
-            statement.setString(4,searchText);
-            ResultSet set = statement.executeQuery();
-            while(set.next()){
-                EmployeeAddTm employeeAddTm = new EmployeeAddTm(
-                        set.getString(1),
-                        set.getString(2),
-                        set.getString(3),
-                        set.getString(4),
-                        set.getString(5),
-                        set.getString(6));
-                tmList.add(employeeAddTm);
+            employeeBO.gelAllEmployee();
+            ArrayList<EmployeeDTO> allEmployee = employeeBO.gelAllEmployee();
+            for(EmployeeDTO dto: allEmployee){
+                tblEmployee.getItems().add(new EmployeeAddTm(dto.geteID(),dto.getName(),dto.getAddress(),dto.getNic(),
+                                                             dto.getPosition(),dto.getTelephone()));
             }
-           // System.out.println(tmList);
+        }catch (SQLException e){
 
-            tblEmployee.setItems(tmList);
-
-        }catch (ClassNotFoundException | SQLException e){
-
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
@@ -134,51 +125,74 @@ public class EmployeeFormController {
         }
         return data;
     }
+    private boolean exitRegister(String code) throws SQLException, ClassNotFoundException {
+        return employeeBO.existEmployee(code);
+    }
     public void btnRegisterOnAction(ActionEvent actionEvent) {
-      EmployeeDTO employeeDTO = new EmployeeDTO(
-              txteID.getText(),
-              txtName.getText(),
-              txtAddress.getText(),
-              txtNIC.getText(),
-              txtPosition.getText(),
-              txtTelephone.getText());
+         String eID = txteID.getText();
+         String name = txtName.getText();
+         String address = txtAddress.getText();
+         String nic = txtNIC.getText();
+         String position = txtPosition.getText();
+         String telephone = txtTelephone.getText();
 
-      setPattern();
-        if(emIdMatcher.matches()) {
-            if(emNameMatcher.matches()) {
-                if(emAddressMatcher.matches()) {
-                    if(emTelephoneMatcher.matches()) {
-
-
-                    } else {
-                        txtTelephone.requestFocus();
-                        lblTelephone.setText("invalid Contact ");
-                    }
-                } else {
-                    txtAddress.requestFocus();
-                    lblAddress.setText("invalid Address ");
+        if (!txtName.getText().matches(".*[a-zA-Z0-9]{4,}")) {
+            new Alert(Alert.AlertType.ERROR, "Invalid name").show();
+            txtName.requestFocus();
+//            txtName.setFocusColor(Paint.valueOf("Red"));
+            return;
+        } else if (!txtAddress.getText().matches(".*[a-zA-Z0-9]{4,}")) {
+            new Alert(Alert.AlertType.ERROR, "Wrong Address ").show();
+            txtAddress.requestFocus();
+            return;
+        }else if(!txtNIC.getText().matches(".*[a-zA-Z0-9]{4,}")){
+            new Alert(Alert.AlertType.ERROR, "Wrong NIC").show();
+            txtNIC.requestFocus();
+        }else if (!txtPosition.getText().matches(".*[a-zA-Z0-9]{4,}")) {
+            new Alert(Alert.AlertType.ERROR, "Wrong Position ").show();
+            txtAddress.requestFocus();
+            return;
+        }else if (!txtTelephone.getText().matches(".*(?:7|0|(?:\\\\+94))[0-9]{9,10}")) {
+            new Alert(Alert.AlertType.ERROR, "Contact should be at long").show();
+            txtTelephone.requestFocus();
+            return;
+        }
+        if(btnRegisterID.getText().equalsIgnoreCase("Save Employee")){
+            try{
+                if(exitRegister(eID)){
+                    new Alert(Alert.AlertType.ERROR,eID+"Allready Register").show();
                 }
-            } else {
-                txtName.requestFocus();
-                lblName.setText("invalid Name ");
+                employeeBO.addEmployee(new EmployeeDTO(eID,name,address,nic,position,telephone));
+                tblEmployee.getItems().add(new EmployeeAddTm(eID,name,address,nic,position,telephone));
 
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
-        } else {
-            txteID.requestFocus();
-            lblEID.setText("invalid ID ");
-        }
+        }else {
+            try {
+                if(!exitRegister(eID)){
+                    new Alert(Alert.AlertType.ERROR,eID+"Allready Update").show();
+                }
+                employeeBO.updateEmployee(new EmployeeDTO(eID,name,address,nic,position,telephone));
+                EmployeeAddTm employeeAddTm = tblEmployee.getSelectionModel().getSelectedItem();
 
-        try{
-            boolean isAdded = EmployeeModel.register(employeeDTO);
-            AddEmployeeTbl(searchText);
-            if(isAdded){
-                new Alert(Alert.AlertType.CONFIRMATION,"Employee Added!").show();;
-            }else {
-                new Alert(Alert.AlertType.WARNING,"Something Happened!").show();
+                employeeAddTm.setName(name);
+                employeeAddTm.setAddress(address);
+                employeeAddTm.setNic(nic);
+                employeeAddTm.setPosition(position);
+                employeeAddTm.setTelephone(telephone);
+                tblEmployee.refresh();
+            }catch (SQLException e){
+
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR,eID+"Failed").show();
+                e.printStackTrace();
             }
-        }catch (SQLException | ClassNotFoundException e){
-            throw new RuntimeException(e);
         }
+        btnNewRegisterId.fire();
     }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
