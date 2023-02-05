@@ -59,20 +59,6 @@ public class GuaranteeItemController {
             searchText=newValue;
             AddGuaranteeItemTbl(searchText);
         });
-        setPattern();
-    }
-    public void setPattern(){
-        Pattern userIdPattern = Pattern.compile("^(GI0)([0-9]{1})([0-9]{1,})$");
-        gItemIdMatcher = userIdPattern.matcher(txtItemID.getText());
-
-        Pattern LoanIdPattern = Pattern.compile("^(GI0)([0-9]{1})([0-9]{1,})$");
-        gILoanIdMatcher = LoanIdPattern.matcher(txtLoanID.getText());
-
-        Pattern userNamePattern = Pattern.compile("^([a-zA-Z]{4,})$");
-        gINameMatcher = userNamePattern.matcher(txtName.getText());
-
-        Pattern valivationtPattern = Pattern.compile("^[0-9]{1,}$");
-        gIValivationMatcher = valivationtPattern.matcher(txtValivation.getText());
 
     }
 
@@ -111,7 +97,7 @@ public class GuaranteeItemController {
                Double.parseDouble(txtValivation.getText()));
         boolean isAdd = GuaranteeItemModel.save(txtItemID.getText(),txtLoanID.getText());
 
-        setPattern();
+
         if(gItemIdMatcher.matches()) {
             if(gILoanIdMatcher.matches()) {
                 if(gINameMatcher.matches()) {

@@ -5,10 +5,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -26,6 +23,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,6 +51,7 @@ public class EmployeeFormController {
     public Label lblTelephone;
     public JFXButton btnRegisterID;
     public JFXButton btnNewRegisterId;
+    public JFXButton btnDeleteId;
     private String searchText ="";
     private Matcher emIdMatcher;
     private Matcher emNameMatcher;
@@ -71,27 +70,53 @@ public class EmployeeFormController {
         collPosition.setCellValueFactory(new PropertyValueFactory<>("position"));
         collTelephone.setCellValueFactory(new PropertyValueFactory<>("telephone"));
 
-        /*AddEmployeeTbl(searchText);
-        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchText=newValue;
-            AddEmployeeTbl(searchText);
+        initUI();
+        tblEmployee.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            btnDeleteId.setDisable(newValue==null);
+            btnRegisterID.setText(newValue!=null?"update":"save");
+            btnRegisterID.setDisable(newValue==null);
+
+            if(newValue!=null){
+                txteID.setText(newValue.getId());
+                txtName.setText(newValue.getName());
+                txtAddress.setText(newValue.getAddress());
+                txtNIC.setText(newValue.getNic());
+                txtPosition.setText(newValue.getPosition());
+                txtTelephone.setText(newValue.getTelephone());
+
+
+                txteID.setDisable(false);
+                txtName.setDisable(false);
+                txtAddress.setDisable(false);
+                txtNIC.setDisable(false);
+                txtPosition.setDisable(false);
+                txtTelephone.setDisable(false);
+            }
         });
-*/
-        setPattern();
-     }
 
-    public void setPattern(){
-        Pattern userIdPattern = Pattern.compile("^(E0)([0-9]{1})([0-9]{1,})$");  //(c0)([1-9]{1})([0-9]{1})
-        emIdMatcher = userIdPattern.matcher(txteID.getText());
+        txteID.setOnAction(event -> btnRegisterID.fire());
+        loadAllEmployee();
+    }
+    public void initUI(){
 
-        Pattern userNamePattern = Pattern.compile("^([a-zA-Z]{4,})$"); //[a-zA-Z0-9]{4,}
-        emNameMatcher = userNamePattern.matcher(txtName.getText());
+        txteID.clear();
+        txtName.clear();
+        txtAddress.clear();
+        txtNIC.clear();
+        txtPosition.clear();
+        txtTelephone.clear();
 
-        Pattern userAddressPattern = Pattern.compile("^([a-zA-Z0-9]{4,})$"); //^[a-zA-Z0-9]{4,}$
-        emAddressMatcher = userAddressPattern.matcher(txtAddress.getText());
+        txteID.setDisable(true);
+        txtName.setDisable(true);
+        txtAddress.setDisable(true);
+        txtNIC.setDisable(true);
+        txtPosition.setDisable(true);
+        txtTelephone.setDisable(true);
 
-        Pattern userContactPattern = Pattern.compile("^(?:7|0|(?:\\+94))[0-9]{9,10}$");//.*^(?:7|0|(?:\+94))[0-9]{9,10}$*
-        emTelephoneMatcher = userContactPattern.matcher(txtTelephone.getText());
+        txteID.setEditable(false);
+        btnRegisterID.setDisable(true);
+        btnDeleteId.setDisable(true);
+
     }
 
     private void loadAllEmployee(){
@@ -109,22 +134,6 @@ public class EmployeeFormController {
         }
     }
 
-    public static ArrayList<EmployeeDTO> getAllEmployee() throws SQLException, ClassNotFoundException {
-        Connection connection = DBConnection.getInstance().getConnection();
-        ResultSet result = connection.prepareStatement("SELECT * FROM Employee").executeQuery();
-        ArrayList<EmployeeDTO> data = new ArrayList<>();
-        while(result.next()){
-            EmployeeDTO employeeDTO = new EmployeeDTO(
-                    result.getString(1),
-                    result.getString(2),
-                    result.getString(3),
-                    result.getString(4),
-                    result.getString(5),
-                    result.getString(6));
-            data.add(employeeDTO);
-        }
-        return data;
-    }
     private boolean exitRegister(String code) throws SQLException, ClassNotFoundException {
         return employeeBO.existEmployee(code);
     }
@@ -136,7 +145,7 @@ public class EmployeeFormController {
          String position = txtPosition.getText();
          String telephone = txtTelephone.getText();
 
-        if (!txtName.getText().matches(".*[a-zA-Z0-9]{4,}")) {
+        if (!eID.matches(".*[a-zA-Z0-9]{4,}")) {
             new Alert(Alert.AlertType.ERROR, "Invalid name").show();
             txtName.requestFocus();
 //            txtName.setFocusColor(Paint.valueOf("Red"));
@@ -196,80 +205,76 @@ public class EmployeeFormController {
     }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
-        String eId=txteID.getText();
-        String eName=txtName.getText();
-        String eAddress=txtAddress.getText();
-        String eNic=txtNIC.getText();
-        String ePosition=txtPosition.getText();
-        String eTelephone=txtTelephone.getText();
+        txteID.setDisable(false);
+        txtName.setDisable(false);
+        txtAddress.setDisable(false);
+        txtNIC.setDisable(false);
+        txtPosition.setDisable(false);
+        txtTelephone.setDisable(false);
 
-        String sql="UPDATE Employee SET  name = ?, address = ?, nic = ?, position = ?, telephone = ?  where eID = ?";
+        txteID.clear();
+        txtName.clear();
+        txtAddress.clear();
+        txtNIC.clear();
+        txtPosition.clear();
+        txtTelephone.clear();
 
-        try {
-            Connection connection = DBConnection.getInstance().getConnection();
-            PreparedStatement pre=connection.prepareStatement(sql);
+        txteID.setText(genarateNewID());
+        btnRegisterID.setDisable(false);
+        btnRegisterID.setText("Save Employee");
+    }
+    private String genarateNewID() {
+        try{
+            return employeeBO.genaRateNewId();
+        }catch (SQLException e){
 
-            pre.setObject(1, txtName.getText());
-            pre.setObject(2, txtAddress.getText());
-            pre.setObject(3, txtNIC.getText());
-            pre.setObject(4, txtPosition.getText());
-            pre.setObject(5, txtTelephone.getText());
-            pre.setObject(6, txteID.getText());
-
-            int executeUpdate = pre.executeUpdate();
-            AddEmployeeTbl(searchText);
-
-            if(executeUpdate>0){
-                new Alert(Alert.AlertType.CONFIRMATION," Updated!").show();;
-            }else {
-                new Alert(Alert.AlertType.WARNING,"Something Happened!").show();
-            }
-
-        } catch (Exception e) {
-
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
+        return "E00-001";
+
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
-        String eID=txteID.getText();
+        String id = tblEmployee.getSelectionModel().getSelectedItem().getId();
 
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Are you sure DELETE ?", ButtonType.YES,ButtonType.NO);
+        Optional<ButtonType> buttonType = alert.showAndWait();
+        if (buttonType.get() == ButtonType.YES) {
+            try {
+                employeeBO.deleteEmployee(id);
+                tblEmployee.getItems().remove(tblEmployee.getSelectionModel().getSelectedItem());
+                tblEmployee.getSelectionModel().clearSelection();
+                initUI();
+            } catch (SQLException e) {
 
-        try {
-            Connection connection = DBConnection.getInstance().getConnection();
-            String sql="DELETE FROM Employee WHERE eID=?";
-            PreparedStatement pre=connection.prepareStatement(sql);
-            pre.setObject(1, txteID.getText());
-            int executeUpdate = pre.executeUpdate();
-
-            if(executeUpdate>0){
-                new Alert(Alert.AlertType.CONFIRMATION," Deleted!").show();
-            AddEmployeeTbl(searchText);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
         }
     }
 
 
     public void txtEmNameKeyTypeOnAction(KeyEvent keyEvent) {
         lblName.setText("");
-        Pattern userNamePattern = Pattern.compile("^([a-zA-Z]{4,})$");
+        Pattern userNamePattern = Pattern.compile("");
         emNameMatcher = userNamePattern.matcher(txtName.getText());
 
-        if (!emNameMatcher.matches()) {
+        /*if (!emNameMatcher.matches()) {
             txtName.requestFocus();
             lblName.setText("invalid Name");
-        }
+        }*/
     }
 
     public void txtEmAddressKeyTypeOnAction(KeyEvent keyEvent) {
         lblAddress.setText("");
-        Pattern userAddressPattern = Pattern.compile("^([a-zA-Z0-9]{4,})$");
+        Pattern userAddressPattern = Pattern.compile("");
         emAddressMatcher = userAddressPattern.matcher(txtAddress.getText());
 
-        if (!emAddressMatcher.matches()) {
+      /*  if (!emAddressMatcher.matches()) {
             txtAddress.requestFocus();
             lblAddress.setText("invalid Name");
-        }
+        }*/
     }
 
     public void txtEmNicKeyTypeOnAction(KeyEvent keyEvent) {
@@ -278,13 +283,13 @@ public class EmployeeFormController {
     public void txtEmTelephoneKeyTypeOnAction(KeyEvent keyEvent) {
         lblTelephone.setText("");
 
-        Pattern userContactPattern = Pattern.compile("^(?:7|0|(?:\\+94))[0-9]{9,10}$");
+        Pattern userContactPattern = Pattern.compile("");
         emTelephoneMatcher = userContactPattern.matcher(txtTelephone.getText());
 
-        if (!emTelephoneMatcher.matches()) {
+        /*if (!emTelephoneMatcher.matches()) {
             txtTelephone.requestFocus();
             lblTelephone.setText("invalid Number");
-        }
+        }*/
     }
 
     public void txtEmPositionKeyTypeOnAction(KeyEvent keyEvent) {
@@ -293,13 +298,13 @@ public class EmployeeFormController {
     public void txtEmIdKeyTypeOnAction(KeyEvent keyEvent) {
         lblEID.setText("");
 
-        Pattern userIdPattern = Pattern.compile("^(E0)([0-9]{1})([0-9]{1,})$");
+        Pattern userIdPattern = Pattern.compile("");
         emIdMatcher = userIdPattern.matcher(txteID.getText());
 
-        if (!emIdMatcher.matches()) {
+        /*if (!emIdMatcher.matches()) {
             txteID.requestFocus();
             lblEID.setText("invalid ID");
-        }
+        }*/
     }
 
 }
