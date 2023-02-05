@@ -28,7 +28,7 @@
         <JFXTextField fx:id="txtAddress" labelFloat="true" layoutX="68.0" layoutY="266.0" onKeyReleased="#txtgAddressKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Address" />
         <JFXTextField fx:id="txtNIC" labelFloat="true" layoutX="68.0" layoutY="327.0" onKeyReleased="#txtgNicKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="NIC " />
         <JFXTextField fx:id="txtTelephone" labelFloat="true" layoutX="68.0" layoutY="384.0" onKeyReleased="#txtgTelephoneKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Telephone" />
-        <JFXButton layoutX="71.0" layoutY="441.0" onAction="#btnRegisterOnAction" prefHeight="35.0" prefWidth="268.0" style="-fx-background-color: #9be39b,        linear-gradient(#d6d6d6 50%, white 100%),        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%); -fx-background-radius: 30; -fx-background-insets: 1,2,2; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );" text="Register">
+        <JFXButton fx:id="btnNewRegisterID" layoutX="71.0" layoutY="441.0" onAction="#btnRegisterOnAction" prefHeight="35.0" prefWidth="268.0" style="-fx-background-color: #9be39b,        linear-gradient(#d6d6d6 50%, white 100%),        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%); -fx-background-radius: 30; -fx-background-insets: 1,2,2; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );" text="+ New Registor">
             <font>
                 <Font size="18.0" />
             </font>
@@ -36,7 +36,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
         </JFXButton>
-        <JFXButton layoutX="71.0" layoutY="480.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="268.0" style="-fx-background-color: #9be39b,        linear-gradient(#d6d6d6 50%, white 100%),        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%); -fx-background-radius: 30; -fx-background-insets: 1,2,2; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );" text="Update ">
+        <JFXButton fx:id="btnRegisterID" layoutX="71.0" layoutY="480.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="268.0" style="-fx-background-color: #9be39b,        linear-gradient(#d6d6d6 50%, white 100%),        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%); -fx-background-radius: 30; -fx-background-insets: 1,2,2; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );" text="Update ">
             <font>
                 <Font size="18.0" />
             </font>
@@ -44,7 +44,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
         </JFXButton>
-        <JFXButton layoutX="71.0" layoutY="519.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="268.0" style="-fx-background-color: #9be39b,        linear-gradient(#d6d6d6 50%, white 100%),        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%); -fx-background-radius: 30; -fx-background-insets: 1,2,2; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );" text="Delete ">
+        <JFXButton fx:id="btnDeleteID" layoutX="71.0" layoutY="519.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="268.0" style="-fx-background-color: #9be39b,        linear-gradient(#d6d6d6 50%, white 100%),        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%); -fx-background-radius: 30; -fx-background-insets: 1,2,2; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );" text="Delete ">
             <font>
                 <Font size="18.0" />
             </font>
