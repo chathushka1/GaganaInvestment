@@ -5,10 +5,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -27,6 +24,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -73,18 +71,35 @@ public class GuarantorFormController {
         collNIC.setCellValueFactory(new PropertyValueFactory<>("nic"));
         collTelephone.setCellValueFactory(new PropertyValueFactory<>("telephone"));
 
+        initUI();
+        tblGuarantor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            btnDeleteID.setDisable(newValue==null);
+            btnRegisterID.setText(newValue!=null?"update":"save");
+            btnRegisterID.setDisable(newValue==null);
 
+            if(newValue!=null){
+                txtGuarantorID.setText(newValue.getgID());
+                txtLoanID.setText(newValue.getlID());
+                txtName.setText(newValue.getName());
+                txtAddress.setText(newValue.getAddress());
+                txtTelephone.setText(newValue.getTelephone());
 
-    }
+                txtGuarantorID.setDisable(false);
+                txtLoanID.setDisable(false);
+                txtName.setDisable(false);
+                txtAddress.setDisable(false);
+                txtNIC.setDisable(false);
+                txtTelephone.setDisable(false);
+
+            }
+        });
+        txtGuarantorID.setOnAction(event -> btnRegisterID.fire());
+        loadAllGuarantor();
+
+        }
 
     public void initUI(){
-        /*private String gID ;
-        private String lID ;
-        private String name;
-        private String address;
-        private String nic ;
-        private String telephone ;
-*/
+
         txtGuarantorID.clear();
         txtLoanID.clear();
         txtName.clear();
@@ -150,7 +165,7 @@ public class GuarantorFormController {
             txtTelephone.requestFocus();
             return;
         }
-        if(btnRegisterID.getText().equalsIgnoreCase("Save Debtor")){
+        if(btnRegisterID.getText().equalsIgnoreCase("Save Guarantor")){
             try {
                 if(exitRegister(gId)){
                     new Alert(Alert.AlertType.ERROR,gId+"Allready Register").show();
@@ -194,7 +209,22 @@ public class GuarantorFormController {
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
+        String id = tblGuarantor.getSelectionModel().getSelectedItem().();
 
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Are you sure DELETE ?", ButtonType.YES,ButtonType.NO);
+        Optional<ButtonType> buttonType = alert.showAndWait();
+        if (buttonType.get() == ButtonType.YES) {
+            try {
+                guarantorBO.deleteGuarantor(id);
+                tblGuarantor.getItems().remove(tblGuarantor.getSelectionModel().getSelectedItem());
+                tblGuarantor.getSelectionModel().clearSelection();
+                initUI();
+            } catch (SQLException e) {
+
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void txtgIdKeyTypeOnAction(KeyEvent keyEvent) {
