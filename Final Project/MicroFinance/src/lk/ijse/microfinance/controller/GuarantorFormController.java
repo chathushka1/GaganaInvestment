@@ -77,8 +77,8 @@ public class GuarantorFormController {
             btnRegisterID.setText(newValue!=null?"update":"save");
             btnRegisterID.setDisable(newValue==null);
 
-            if(newValue!=null){
-                txtGuarantorID.setText(newValue.getgID());
+   /*         if(newValue!=null){
+                txtGuarantorID.setText(newValue.get)
                 txtLoanID.setText(newValue.getlID());
                 txtName.setText(newValue.getName());
                 txtAddress.setText(newValue.getAddress());
@@ -91,7 +91,7 @@ public class GuarantorFormController {
                 txtNIC.setDisable(false);
                 txtTelephone.setDisable(false);
 
-            }
+            }*/
         });
         txtGuarantorID.setOnAction(event -> btnRegisterID.fire());
         loadAllGuarantor();
@@ -208,8 +208,8 @@ public class GuarantorFormController {
         return guarantorBO.existGuarantor(code);
     }
 
-    public void btnDeleteOnAction(ActionEvent actionEvent) {
-        String id = tblGuarantor.getSelectionModel().getSelectedItem().();
+    /*public void btnDeleteOnAction(ActionEvent actionEvent) {
+      //  String id = tblGuarantor.getSelectionModel().getSelectedItem().();
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Are you sure DELETE ?", ButtonType.YES,ButtonType.NO);
         Optional<ButtonType> buttonType = alert.showAndWait();
@@ -225,7 +225,7 @@ public class GuarantorFormController {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 
     public void txtgIdKeyTypeOnAction(KeyEvent keyEvent) {
         lblGuarantorId.setText("");

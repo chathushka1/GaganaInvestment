@@ -30,7 +30,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public boolean updateData(Employee entity) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("UPDATE Employee SET name = ?, address = ?, nic = ? ,position = ?, telephone=? WHERE eID=?",entity.getName(),
+        return SQLUtil.execute("UPDATE  Employee SET name = ?, address = ?, nic = ? ,position = ?, telephone=? WHERE eID=?",entity.getName(),
                 entity.getAddress(),entity.getNic(),entity.getPosition(),entity.getTelephone(),entity.geteID());
     }
 

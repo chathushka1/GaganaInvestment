@@ -44,10 +44,10 @@ public class GuaranteeItemDAOImpl implements GuaranteeItemDAO {
         ResultSet rst=SQLUtil.execute("SELECT gItemID FROM GuaranteeItem ORDER BY gItemID DESC LIMIT 1;");
         if (rst.next()){
             String ids=rst.getString("gItemID");
-            int newGItemId=Integer.parseInt(ids.replace("GI00-",""))+1;
-            return String.format("GI00-%03d",newGItemId);
+            int newGItemId=Integer.parseInt(ids.replace("I00-",""))+1;
+            return String.format("I00-%03d",newGItemId);
         }else {
-            return "GI00-001";
+            return "I00-001";
         }
     }
 

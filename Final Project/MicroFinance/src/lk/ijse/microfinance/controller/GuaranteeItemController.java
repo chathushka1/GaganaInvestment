@@ -127,7 +127,7 @@ public class GuaranteeItemController {
         String name = txtName.getText();
         double valivation  = Double.parseDouble(txtValivation.getText());
 
-        if (!name.matches(".*[a-zA-Z0-9]{4,}")) {
+       /* if (!name.matches(".*[a-zA-Z0-9]{4,}")) {
             new Alert(Alert.AlertType.ERROR, "Invalid name").show();
             txtName.requestFocus();
 //            txtName.setFocusColor(Paint.valueOf("Red"));
@@ -135,7 +135,7 @@ public class GuaranteeItemController {
         } else if(!txtValivation.getText().matches(".*[0-9]{4,}")){
             new Alert(Alert.AlertType.ERROR, "Valivation should not ").show();
             txtValivation.requestFocus();
-        }
+        }*/
         if(btnRegisterID.getText().equalsIgnoreCase("Save GuaranteeItem")){
             try {
                 if(exitRegister(gItemID)){
@@ -191,12 +191,12 @@ public class GuaranteeItemController {
         txtName.clear();
         txtValivation.clear();
 
-        txtItemID.setText(genarateNewID());
+        txtItemID.setText(genarateNewIDS());
         btnRegisterID.setDisable(false);
         btnRegisterID.setText("Save GuaranteeItem");
 
     }
-    private String genarateNewID() {
+    private String genarateNewIDS() {
         try{
             return guaranteeItemBO.genaRateNewId();
         }catch (SQLException e){
@@ -204,7 +204,7 @@ public class GuaranteeItemController {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return "GI00-001";
+        return "I00-001";
 
     }
     public void btnDeleteOnAction(ActionEvent actionEvent) {

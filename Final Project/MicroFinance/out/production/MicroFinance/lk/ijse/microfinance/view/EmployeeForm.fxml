@@ -24,11 +24,11 @@
                 <Font name="ArnoPro-BoldCaption" size="25.0" />
             </font>
         </Label>
-        <JFXTextField fx:id="txtName" labelFloat="true" layoutX="71.0" layoutY="163.0" onKeyReleased="#txtEmNameKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Name" />
-        <JFXTextField fx:id="txtAddress" labelFloat="true" layoutX="71.0" layoutY="222.0" onKeyReleased="#txtEmAddressKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Address" />
-        <JFXTextField fx:id="txtNIC" labelFloat="true" layoutX="71.0" layoutY="281.0" onKeyReleased="#txtEmNicKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="NIC " />
-        <JFXTextField fx:id="txtTelephone" labelFloat="true" layoutX="71.0" layoutY="405.0" onKeyReleased="#txtEmTelephoneKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Telephone" />
-        <JFXButton fx:id="btnNewRegisterId" layoutX="71.0" layoutY="463.0" onAction="#btnRegisterOnAction" prefHeight="35.0" prefWidth="268.0" style="-fx-background-color: #9be39b,        linear-gradient(#d6d6d6 50%, white 100%),        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%); -fx-background-radius: 30; -fx-background-insets: 1,2,2; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );" text="+ New Register">
+        <JFXTextField fx:id="txtName" labelFloat="true" layoutX="71.0" layoutY="163.0" prefHeight="25.0" prefWidth="268.0" promptText="Name" />
+        <JFXTextField fx:id="txtAddress" labelFloat="true" layoutX="71.0" layoutY="224.0" prefHeight="25.0" prefWidth="268.0" promptText="Address" />
+        <JFXTextField fx:id="txtNIC" labelFloat="true" layoutX="71.0" layoutY="281.0" prefHeight="25.0" prefWidth="268.0" promptText="NIC " />
+        <JFXTextField fx:id="txtTelephone" labelFloat="true" layoutX="71.0" layoutY="405.0" prefHeight="25.0" prefWidth="268.0" promptText="Telephone" />
+        <JFXButton fx:id="btnNewRegisterId" layoutX="71.0" layoutY="502.0" onAction="#btnRegisterOnAction" prefHeight="35.0" prefWidth="268.0" style="-fx-background-color: #9be39b,        linear-gradient(#d6d6d6 50%, white 100%),        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%); -fx-background-radius: 30; -fx-background-insets: 1,2,2; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );" text=" Register">
             <font>
                 <Font size="18.0" />
             </font>
@@ -36,7 +36,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
         </JFXButton>
-        <JFXButton fx:id="btnRegisterID" layoutX="71.0" layoutY="502.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="268.0" style="-fx-background-color: #9be39b,        linear-gradient(#d6d6d6 50%, white 100%),        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%); -fx-background-radius: 30; -fx-background-insets: 1,2,2; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );" text="Update ">
+        <JFXButton fx:id="btnRegisterID" layoutX="71.0" layoutY="463.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="268.0" style="-fx-background-color: #9be39b,        linear-gradient(#d6d6d6 50%, white 100%),        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%); -fx-background-radius: 30; -fx-background-insets: 1,2,2; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );" text="+ New Register">
             <font>
                 <Font size="18.0" />
             </font>
@@ -56,8 +56,8 @@
         <Line endX="197.0" endY="-29.0" layoutX="184.0" layoutY="83.0" startX="197.0" startY="524.0" />
         <Line endX="213.0" layoutX="168.0" layoutY="608.0" startX="-139.0" />
         <Line endX="197.0" endY="-30.0" layoutX="-169.0" layoutY="83.0" startX="197.0" startY="525.0" />
-        <JFXTextField fx:id="txtPosition" labelFloat="true" layoutX="71.0" layoutY="343.0" onKeyReleased="#txtEmPositionKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Position" />
-      <JFXTextField fx:id="txteID" labelFloat="true" layoutX="71.0" layoutY="98.0" onKeyReleased="#txtEmIdKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Employee ID                                           * ex - E001" />
+        <JFXTextField fx:id="txtPosition" labelFloat="true" layoutX="71.0" layoutY="343.0" prefHeight="25.0" prefWidth="268.0" promptText="Position" />
+      <JFXTextField fx:id="txteID" labelFloat="true" layoutX="71.0" layoutY="98.0" prefHeight="25.0" prefWidth="268.0" promptText="Employee ID                                           * ex - E001" />
       <TableView fx:id="tblEmployee" layoutX="412.0" layoutY="301.0" prefHeight="300.0" prefWidth="651.0">
          <columns>
             <TableColumn fx:id="collEmployeeID" minWidth="1.0" prefWidth="95.0" text="Employee ID" />
