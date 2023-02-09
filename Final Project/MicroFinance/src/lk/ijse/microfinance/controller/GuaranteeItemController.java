@@ -34,13 +34,13 @@ public class GuaranteeItemController {
     public JFXTextField txtValivation;
     public JFXTextField txtItemID;
     public JFXTextField txtLoanID;
-    public TableView <GuaranteeItemAddTm> tblGuaranteeItem;
-    public TableColumn<GuaranteeItemAddTm,String>  collLoanID;
-    public TableColumn<GuaranteeItemAddTm,String>collName;
-    public TableColumn <GuaranteeItemAddTm,Double>collValivation;
+    public TableView<GuaranteeItemAddTm> tblGuaranteeItem;
+    public TableColumn<GuaranteeItemAddTm, String> collLoanID;
+    public TableColumn<GuaranteeItemAddTm, String> collName;
+    public TableColumn<GuaranteeItemAddTm, Double> collValivation;
     public JFXTextField txtName;
     public JFXTextField txtSearch;
-    public TableColumn <GuaranteeItemAddTm,String>collId;
+    public TableColumn<GuaranteeItemAddTm, String> collId;
     public Label lblItemID;
     public Label lblLoanId;
     public Label lblName;
@@ -48,7 +48,7 @@ public class GuaranteeItemController {
     public JFXButton btnRegisterID;
     public JFXButton btnDeleteID;
     public JFXButton btnNewRegisterID;
-    private String searchText ="";
+    private String searchText = "";
     private Matcher gItemIdMatcher;
     private Matcher gILoanIdMatcher;
     private Matcher gINameMatcher;
@@ -56,7 +56,7 @@ public class GuaranteeItemController {
     GuaranteeItemBO guaranteeItemBO = (GuaranteeItemBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.GUARANTEEITEMBO);
 
 
-    public void initialize(){
+    public void initialize() {
         collId.setCellValueFactory(new PropertyValueFactory<>("id"));
         collLoanID.setCellValueFactory(new PropertyValueFactory<>("loanId"));
         collName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -64,11 +64,11 @@ public class GuaranteeItemController {
 
         initUI();
         tblGuaranteeItem.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            btnDeleteID.setDisable(newValue==null);
-            btnRegisterID.setText(newValue!=null?"update":"save");
-            btnRegisterID.setDisable(newValue==null);
+            btnDeleteID.setDisable(newValue == null);
+            btnRegisterID.setText(newValue != null ? "update" : "save");
+            btnRegisterID.setDisable(newValue == null);
 
-            if(newValue!=null){
+            if (newValue != null) {
                 txtItemID.setText(newValue.getId());
                 txtLoanID.setText(newValue.getLoanId());
                 txtName.setText(newValue.getName());
@@ -87,9 +87,9 @@ public class GuaranteeItemController {
         loadAllGItem();
 
 
-
     }
-    public void initUI(){
+
+    public void initUI() {
         txtItemID.clear();
         txtLoanID.clear();
         txtName.clear();
@@ -106,15 +106,15 @@ public class GuaranteeItemController {
 
     }
 
-    private void loadAllGItem(){
-        try{
+    private void loadAllGItem() {
+        try {
             guaranteeItemBO.gelAllGItem();
-            ArrayList<GuaranteeItemDTO> allGItem =  guaranteeItemBO.gelAllGItem();
-            for(GuaranteeItemDTO dto : allGItem){
-                tblGuaranteeItem.getItems().add(new GuaranteeItemAddTm(dto.getgItemID(),dto.getLoanId(),dto.getName(),dto.getValivation()));
+            ArrayList<GuaranteeItemDTO> allGItem = guaranteeItemBO.gelAllGItem();
+            for (GuaranteeItemDTO dto : allGItem) {
+                tblGuaranteeItem.getItems().add(new GuaranteeItemAddTm(dto.getgItemID(), dto.getLoanId(), dto.getName(), dto.getValivation()));
             }
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -125,7 +125,7 @@ public class GuaranteeItemController {
         String gItemID = txtItemID.getId();
         String lID = txtLoanID.getText();
         String name = txtName.getText();
-        double valivation  = Double.parseDouble(txtValivation.getText());
+        double valivation = Double.parseDouble(txtValivation.getText());
 
        /* if (!name.matches(".*[a-zA-Z0-9]{4,}")) {
             new Alert(Alert.AlertType.ERROR, "Invalid name").show();
@@ -136,27 +136,26 @@ public class GuaranteeItemController {
             new Alert(Alert.AlertType.ERROR, "Valivation should not ").show();
             txtValivation.requestFocus();
         }*/
-        if(btnRegisterID.getText().equalsIgnoreCase("Save GuaranteeItem")){
+        if (btnRegisterID.getText().equalsIgnoreCase("Save GuaranteeItem")) {
             try {
-                if(exitRegister(gItemID)){
-                    new Alert(Alert.AlertType.ERROR,gItemID+"Allready Register").show();
+                if (exitRegister(gItemID)) {
+                    new Alert(Alert.AlertType.ERROR, gItemID + "Allready Register").show();
 
                 }
-                guaranteeItemBO.addGItem(new GuaranteeItemDTO(gItemID,lID,name,valivation));
-                tblGuaranteeItem.getItems().add(new GuaranteeItemAddTm(gItemID,lID,name,valivation));
+                guaranteeItemBO.addGItem(new GuaranteeItemDTO(gItemID, lID, name, valivation));
+                tblGuaranteeItem.getItems().add(new GuaranteeItemAddTm(gItemID, lID, name, valivation));
 
-            }
-            catch (SQLException e){
-                new Alert(Alert.AlertType.ERROR,gItemID+"Failed").show();
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, gItemID + "Failed").show();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-        }else {
-            try{
-                if(!exitRegister(gItemID)){
-                    new Alert(Alert.AlertType.ERROR,gItemID+"Allready Update").show();
+        } else {
+            try {
+                if (!exitRegister(gItemID)) {
+                    new Alert(Alert.AlertType.ERROR, gItemID + "Allready Update").show();
                 }
-                guaranteeItemBO.updateGItem(new GuaranteeItemDTO(gItemID,lID,name,valivation));
+                guaranteeItemBO.updateGItem(new GuaranteeItemDTO(gItemID, lID, name, valivation));
 
                 GuaranteeItemAddTm guaranteeItemAddTm = tblGuaranteeItem.getSelectionModel().getSelectedItem();
                 guaranteeItemAddTm.setLoanId(lID);
@@ -165,9 +164,10 @@ public class GuaranteeItemController {
 
                 tblGuaranteeItem.refresh();
 
-            }catch (SQLException e){} catch (ClassNotFoundException e) {
+            } catch (SQLException e) {
+            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
-                new Alert(Alert.AlertType.ERROR,gItemID+"Failed").show();
+                new Alert(Alert.AlertType.ERROR, gItemID + "Failed").show();
                 e.printStackTrace();
             }
 
@@ -175,11 +175,12 @@ public class GuaranteeItemController {
         btnNewRegisterID.fire();
 
 
-
     }
+
     private boolean exitRegister(String code) throws SQLException, ClassNotFoundException {
         return guaranteeItemBO.existGItem(code);
     }
+
     public void btnUpdateOnAction(ActionEvent actionEvent) {
         txtItemID.setDisable(false);
         txtLoanID.setDisable(false);
@@ -196,10 +197,11 @@ public class GuaranteeItemController {
         btnRegisterID.setText("Save GuaranteeItem");
 
     }
+
     private String genarateNewIDS() {
-        try{
+        try {
             return guaranteeItemBO.genaRateNewId();
-        }catch (SQLException e){
+        } catch (SQLException e) {
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -207,10 +209,11 @@ public class GuaranteeItemController {
         return "I00-001";
 
     }
+
     public void btnDeleteOnAction(ActionEvent actionEvent) {
         String id = tblGuaranteeItem.getSelectionModel().getSelectedItem().getId();
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Are you sure DELETE ?", ButtonType.YES,ButtonType.NO);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure DELETE ?", ButtonType.YES, ButtonType.NO);
         Optional<ButtonType> buttonType = alert.showAndWait();
         if (buttonType.get() == ButtonType.YES) {
             try {
@@ -218,59 +221,11 @@ public class GuaranteeItemController {
                 tblGuaranteeItem.getItems().remove(tblGuaranteeItem.getSelectionModel().getSelectedItem());
                 tblGuaranteeItem.getSelectionModel().clearSelection();
                 initUI();
-            }catch (SQLException e){
+            } catch (SQLException e) {
 
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }
-    }
-
-
-    public void txtLoanIdKeyTypeOnAction(KeyEvent keyEvent) {
-        lblLoanId.setText("");
-
-        Pattern userIdPattern = Pattern.compile("");
-        gILoanIdMatcher = userIdPattern.matcher(txtItemID.getText());
-/*
-        if (!gILoanIdMatcher.matches()) {
-            txtLoanID.requestFocus();
-            lblLoanId.setText("invalid ID");*/
-        //}
-    }
-
-    public void txtItemIdKeyTypeOnAction(KeyEvent keyEvent) {
-        lblItemID.setText("");
-
-        Pattern userIdPattern = Pattern.compile("");
-        gItemIdMatcher = userIdPattern.matcher(txtItemID.getText());
-
-        /*if (!gItemIdMatcher.matches()) {
-            txtItemID.requestFocus();
-            lblItemID.setText("invalid ID");
-        }*/
-    }
-
-    public void txtNameKeyTypeOnAction(KeyEvent keyEvent) {
-        lblName.setText("");
-        Pattern userNamePattern = Pattern.compile("");
-        gINameMatcher = userNamePattern.matcher(txtName.getText());
-
-       /* if (!gItemIdMatcher.matches()) {
-            txtName.requestFocus();
-            lblName.setText("invalid Name");
-        }*/
-    }
-
-    public void txtValivationKeyTypeOnAction(KeyEvent keyEvent) {
-        lblValivation.setText("");
-
-        Pattern amountPattern = Pattern.compile("");
-        gIValivationMatcher = amountPattern.matcher(txtValivation.getText());
-
-       /* if (!gIValivationMatcher.matches()) {
-            txtValivation.requestFocus();
-            lblValivation.setText("invalid Number");
-        }*/
     }
 }

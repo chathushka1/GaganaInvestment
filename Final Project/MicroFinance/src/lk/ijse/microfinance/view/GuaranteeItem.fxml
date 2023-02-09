@@ -24,7 +24,7 @@
                 <Font name="ArnoPro-BoldCaption" size="25.0" />
             </font>
         </Label>
-        <JFXTextField fx:id="txtName" labelFloat="true" layoutX="67.0" layoutY="223.0" onKeyReleased="#txtNameKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Name" />
+        <JFXTextField fx:id="txtName" labelFloat="true" layoutX="67.0" layoutY="223.0" prefHeight="25.0" prefWidth="268.0" promptText="Name" />
         <JFXButton fx:id="btnNewRegisterID" layoutX="71.0" layoutY="441.0" onAction="#btnRegisterOnAction" prefHeight="35.0" prefWidth="268.0" style="-fx-background-color: #9be39b,        linear-gradient(#d6d6d6 50%, white 100%),        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%); -fx-background-radius: 30; -fx-background-insets: 1,2,2; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );" text="+ Add New Item ">
             <font>
                 <Font size="18.0" />
@@ -53,9 +53,9 @@
         <Line endX="197.0" endY="-29.0" layoutX="184.0" layoutY="83.0" startX="197.0" startY="524.0" />
         <Line endX="213.0" layoutX="168.0" layoutY="608.0" startX="-139.0" />
         <Line endX="197.0" endY="-30.0" layoutX="-169.0" layoutY="83.0" startX="197.0" startY="525.0" />
-        <JFXTextField fx:id="txtValivation" labelFloat="true" layoutX="68.0" layoutY="294.0" onKeyReleased="#txtValivationKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Valivation" />
-      <JFXTextField fx:id="txtItemID" labelFloat="true" layoutX="67.0" layoutY="84.0" onKeyReleased="#txtItemIdKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Item ID                                                   * ex - GI001" />
-      <JFXTextField fx:id="txtLoanID" labelFloat="true" layoutX="67.0" layoutY="154.0" onKeyReleased="#txtLoanIdKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Loan ID                                                   * ex - L001" />
+        <JFXTextField fx:id="txtValivation" labelFloat="true" layoutX="68.0" layoutY="294.0" prefHeight="25.0" prefWidth="268.0" promptText="Valivation" />
+      <JFXTextField fx:id="txtItemID" labelFloat="true" layoutX="67.0" layoutY="84.0" prefHeight="25.0" prefWidth="268.0" promptText="Item ID                                                   * ex - GI001" />
+      <JFXTextField fx:id="txtLoanID" labelFloat="true" layoutX="67.0" layoutY="154.0" prefHeight="25.0" prefWidth="268.0" promptText="Loan ID                                                   * ex - L001" />
       <TableView fx:id="tblGuaranteeItem" layoutX="413.0" layoutY="308.0" prefHeight="300.0" prefWidth="651.0">
          <columns>
             <TableColumn fx:id="collId" minWidth="1.0" prefWidth="162.0" text="Item ID" />

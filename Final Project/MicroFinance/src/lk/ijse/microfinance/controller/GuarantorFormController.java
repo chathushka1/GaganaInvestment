@@ -74,8 +74,8 @@ public class GuarantorFormController {
         initUI();
         tblGuarantor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             btnDeleteID.setDisable(newValue==null);
-            btnRegisterID.setText(newValue!=null?"update":"save");
-            btnRegisterID.setDisable(newValue==null);
+            btnNewRegisterID.setText(newValue!=null?"update":"save");
+            btnNewRegisterID.setDisable(newValue==null);
 
             if(newValue!=null){
                 txtGuarantorID.setText(newValue.getId());
@@ -93,7 +93,7 @@ public class GuarantorFormController {
 
             }
         });
-        txtGuarantorID.setOnAction(event -> btnRegisterID.fire());
+        txtGuarantorID.setOnAction(event -> btnNewRegisterID.fire());
         loadAllGuarantor();
 
         }
@@ -115,7 +115,7 @@ public class GuarantorFormController {
         txtTelephone.setDisable(true);
 
         txtGuarantorID.setEditable(false);
-        btnRegisterID.setDisable(true);
+        btnNewRegisterID.setDisable(true);
         btnDeleteID.setDisable(true);
 
 
@@ -137,10 +137,6 @@ public class GuarantorFormController {
     }
 
     public void btnRegisterOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-
-    }
-
-    public void btnUpdateOnAction(ActionEvent actionEvent) {
         String gId=txtGuarantorID.getText();
         String lId=txtLoanID.getText();
         String gName=txtName.getText();
@@ -165,7 +161,7 @@ public class GuarantorFormController {
             txtTelephone.requestFocus();
             return;
         }
-        if(btnRegisterID.getText().equalsIgnoreCase("Save Guarantor")){
+        if(btnNewRegisterID.getText().equalsIgnoreCase("Save Guarantor")){
             try {
                 if(exitRegister(gId)){
                     new Alert(Alert.AlertType.ERROR,gId+"Allready Register").show();
@@ -202,12 +198,43 @@ public class GuarantorFormController {
             }
 
         }
-        btnNewRegisterID.fire();
+        btnRegisterID.fire();
+    }
+    //gId,lId,gName,gAddress,gNic,gTelephone
+    public void btnUpdateOnAction(ActionEvent actionEvent) {
+       txtGuarantorID.setDisable(false);
+       txtLoanID.setDisable(false);
+       txtName.setDisable(false);
+       txtAddress.setDisable(false);
+       txtNIC.setDisable(false);
+       txtTelephone.setDisable(false);
+
+       txtGuarantorID.clear();
+       txtLoanID.clear();
+       txtName.clear();
+       txtAddress.clear();
+       txtNIC.clear();
+       txtTelephone.clear();
+
+        txtGuarantorID.setText(genarateNewIDs());
+        btnNewRegisterID.setDisable(false);
+        btnNewRegisterID.setText("Save Debtor");
     }
     private boolean exitRegister(String code) throws SQLException, ClassNotFoundException {
         return guarantorBO.existGuarantor(code);
     }
 
+    private String genarateNewIDs() {
+        try{
+            return guarantorBO.genaRateNewId();
+        }catch (SQLException e){
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return "G00-001";
+
+    }
     public void btnDeleteOnAction(ActionEvent actionEvent) {
         String id = tblGuarantor.getSelectionModel().getSelectedItem().getId();
 
