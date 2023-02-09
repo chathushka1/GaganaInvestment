@@ -36,7 +36,7 @@ public class GuarantorFormController {
     public JFXTextField txtTelephone;
     public JFXTextField txtGuarantorID;
     public JFXTextField txtLoanID;
-    public TableView tblGuarantor;
+    public TableView<GuarantorAddTm> tblGuarantor;
     public TableColumn collGuarantorID;
     public TableColumn collLoanID;
     public TableColumn collName;
@@ -77,9 +77,9 @@ public class GuarantorFormController {
             btnRegisterID.setText(newValue!=null?"update":"save");
             btnRegisterID.setDisable(newValue==null);
 
-   /*         if(newValue!=null){
-                txtGuarantorID.setText(newValue.get)
-                txtLoanID.setText(newValue.getlID());
+            if(newValue!=null){
+                txtGuarantorID.setText(newValue.getId());
+                txtLoanID.setText(newValue.getLoanId());
                 txtName.setText(newValue.getName());
                 txtAddress.setText(newValue.getAddress());
                 txtTelephone.setText(newValue.getTelephone());
@@ -91,7 +91,7 @@ public class GuarantorFormController {
                 txtNIC.setDisable(false);
                 txtTelephone.setDisable(false);
 
-            }*/
+            }
         });
         txtGuarantorID.setOnAction(event -> btnRegisterID.fire());
         loadAllGuarantor();
@@ -208,8 +208,8 @@ public class GuarantorFormController {
         return guarantorBO.existGuarantor(code);
     }
 
-    /*public void btnDeleteOnAction(ActionEvent actionEvent) {
-      //  String id = tblGuarantor.getSelectionModel().getSelectedItem().();
+    public void btnDeleteOnAction(ActionEvent actionEvent) {
+        String id = tblGuarantor.getSelectionModel().getSelectedItem().getId();
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Are you sure DELETE ?", ButtonType.YES,ButtonType.NO);
         Optional<ButtonType> buttonType = alert.showAndWait();
@@ -225,77 +225,5 @@ public class GuarantorFormController {
                 e.printStackTrace();
             }
         }
-    }*/
-
-    public void txtgIdKeyTypeOnAction(KeyEvent keyEvent) {
-        lblGuarantorId.setText("");
-
-        Pattern userIdPattern = Pattern.compile("");
-        gIdMatcher = userIdPattern.matcher(txtGuarantorID.getText());
-
-       /* if (!gIdMatcher.matches()) {
-            txtGuarantorID.requestFocus();
-            lblGuarantorId.setText("invalid ID");
-        }*/
-    }
-
-    public void txtgLoanIdKeyTypeOnAction(KeyEvent keyEvent) {
-        lblLoanId.setText("");
-
-        Pattern loanIDPattern = Pattern.compile("");
-        gLoanIdMatcher = loanIDPattern.matcher(txtLoanID.getText());
-
-        /*if (!gLoanIdMatcher.matches()) {
-            txtLoanID.requestFocus();
-            lblLoanId.setText("invalid ID");
-        }*/
-    }
-
-    public void txtgNameKeyTypeOnAction(KeyEvent keyEvent) {
-        lblName.setText("");
-
-        Pattern userNamePattern = Pattern.compile("");
-        gNameMatcher = userNamePattern.matcher(txtName.getText());
-/*
-        if (!gNameMatcher.matches()) {
-            txtName.requestFocus();
-            lblName.setText("invalid Name");
-        }*/
-    }
-
-    public void txtgAddressKeyTypeOnAction(KeyEvent keyEvent) {
-        lblAddress.setText("");
-
-        Pattern userAddressPattern = Pattern.compile("");
-        gAddressMatcher = userAddressPattern.matcher(txtAddress.getText());
-
-        /*if (!gAddressMatcher.matches()) {
-            txtAddress.requestFocus();
-            lblAddress.setText("invalid Address");
-        }*/
-    }
-
-    public void txtgNicKeyTypeOnAction(KeyEvent keyEvent) {
-        lblNic.setText("");
-
-        Pattern nicPattern = Pattern.compile("");
-        gNicMatcher = nicPattern.matcher(txtNIC.getText());
-
-       /* if (!gNicMatcher.matches()) {
-            txtNIC.requestFocus();
-            lblNic.setText("invalid Nic");
-        }*/
-    }
-
-    public void txtgTelephoneKeyTypeOnAction(KeyEvent keyEvent) {
-        lblTelephne.setText("");
-
-        Pattern userContactPattern = Pattern.compile("");
-        gTelephoneMatcher = userContactPattern.matcher(txtTelephone.getText());
-
-        /*if (!gTelephoneMatcher.matches()) {
-            txtTelephone.requestFocus();
-            lblTelephne.setText("invalid Number");
-        }*/
     }
 }
