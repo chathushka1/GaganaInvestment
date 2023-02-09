@@ -11,6 +11,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.microfinance.bo.BOFactory;
+import lk.ijse.microfinance.bo.custom.LoanBO;
 import lk.ijse.microfinance.db.DBConnection;
 import lk.ijse.microfinance.model.LoanModel;
 import lk.ijse.microfinance.to.LoanDTO;
@@ -33,7 +35,7 @@ public class LoanController {
     public JFXTextField txtDebtorID;
     public JFXTextField txtDate;
     public JFXTextField txtLoanID;
-    public TableView tblLoan;
+    public TableView<LoanAddTm> tblLoan;
     public TableColumn collLoanID;
     public TableColumn collDebtorID;
     public TableColumn collAmount;
@@ -51,6 +53,7 @@ public class LoanController {
     public Label lblDebtorId;
     public JFXTextField txtLoanAmount;
     private String searchText ="";
+    LoanBO loanBO = (LoanBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.LOANBO);
 
 
     public void initialize(){
@@ -63,11 +66,36 @@ public class LoanController {
         collPercentage.setCellValueFactory(new PropertyValueFactory<>("percentage"));
         collMonthlyPremium.setCellValueFactory(new PropertyValueFactory<>("monthlyPremium"));
 
-        AddLoanTbl(searchText);
-        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchText=newValue;
-            AddLoanTbl(searchText);
+        initUI();
+        tblLoan.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            btnDeleteId.setDisable(newValue==null);
+            btnRegisterID.setText(newValue!=null?"update":"save");
+            btnRegisterID.setDisable(newValue==null);
+
+            if(newValue!=null){
+                txtDebtorID.setText(newValue.getId());
+                txtName.setText(newValue.getName());
+                txtAddress.setText(newValue.getAddress());
+                txtNIC.setText(newValue.getNic());
+                txtLoanAmount.setText(String.valueOf(newValue.getAmountDeu()));
+                txtTelephone.setText(newValue.getTelephone());
+                txtEmployeeID.setText(newValue.getEmployeeId());
+
+                txtDebtorID.setDisable(false);
+                txtName.setDisable(false);
+                txtAddress.setDisable(false);
+                txtNIC.setDisable(false);
+                txtLoanAmount.setDisable(false);
+                txtTelephone.setDisable(false);
+                txtEmployeeID.setDisable(false);
+
+            }
         });
+
+        txtLoanID.setOnAction(event -> btnRegisterID.fire());
+        loadAllDebtor();
+
+
 
 
     }
@@ -83,8 +111,18 @@ public class LoanController {
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
     }
+    private String genarateNewIDs() {
+        try{
+            return loanBO.genaRateNewId();
+        }catch (SQLException e){
 
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return "L00-001";
 
+    }
 
-
+    public void btnNewSaveOnAction(ActionEvent actionEvent) {
+    }
 }

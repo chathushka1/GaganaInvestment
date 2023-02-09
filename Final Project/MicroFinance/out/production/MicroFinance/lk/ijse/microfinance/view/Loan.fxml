@@ -24,12 +24,12 @@
                 <Font name="ArnoPro-BoldCaption" size="25.0" />
             </font>
         </Label>
-        <JFXTextField fx:id="txtLoanAmount" labelFloat="true" layoutX="68.0" layoutY="191.0" onKeyReleased="#txtAmountKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Amount" />
+        <JFXTextField fx:id="txtLoanAmount" labelFloat="true" layoutX="68.0" layoutY="191.0" prefHeight="25.0" prefWidth="268.0" promptText="Amount" />
         <Line endX="212.0" endY="-0.49999237060546875" layoutX="168.0" layoutY="53.0" startX="-139.5" startY="-0.5" />
         <Line endX="197.0" endY="-29.0" layoutX="183.0" layoutY="83.0" startX="197.0" startY="524.0" />
         <Line endX="212.0" layoutX="168.0" layoutY="608.0" startX="-139.0" />
         <Line endX="197.0" endY="-30.0" layoutX="-169.0" layoutY="83.0" startX="197.0" startY="525.0" />
-        <JFXTextField fx:id="txtPeriod" labelFloat="true" layoutX="67.0" layoutY="248.0" onKeyReleased="#txtPeriodKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Period" />
+        <JFXTextField fx:id="txtPeriod" labelFloat="true" layoutX="67.0" layoutY="248.0" prefHeight="25.0" prefWidth="268.0" promptText="Period" />
         <JFXButton layoutX="90.0" layoutY="511.0" onAction="#btnSaveOnAction" prefHeight="39.0" prefWidth="223.0" style="-fx-background-color: #9be39b,        linear-gradient(#d6d6d6 50%, white 100%),        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%); -fx-background-radius: 30; -fx-background-insets: 1,2,2; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );" text="Save ">
             <font>
                 <Font size="18.0" />
@@ -62,8 +62,8 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXTextField fx:id="txtLoanID" labelFloat="true" layoutX="67.0" layoutY="82.0" onKeyReleased="#txtlIdKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Loan ID                                                    * ex - L001" />
-      <JFXTextField fx:id="txtDebtorID" labelFloat="true" layoutX="67.0" layoutY="135.0" onKeyReleased="#txtDebtorIdKeyTypeOnAction" prefHeight="25.0" prefWidth="268.0" promptText="Debtor ID                                                * ex - D001" />
+      <JFXTextField fx:id="txtLoanID" labelFloat="true" layoutX="67.0" layoutY="82.0" prefHeight="25.0" prefWidth="268.0" promptText="Loan ID                                                    * ex - L001" />
+      <JFXTextField fx:id="txtDebtorID" labelFloat="true" layoutX="67.0" layoutY="135.0" prefHeight="25.0" prefWidth="268.0" promptText="Debtor ID                                                * ex - D001" />
       <JFXTextField fx:id="txtDate" labelFloat="true" layoutX="69.0" layoutY="315.0" prefHeight="25.0" prefWidth="268.0" promptText="Date " />
       <TableView fx:id="tblLoan" layoutX="410.0" layoutY="308.0" prefHeight="300.0" prefWidth="651.0">
          <columns>
@@ -84,7 +84,7 @@
       </Label>
       <JFXTextField fx:id="txtPercentage" layoutX="190.0" layoutY="422.0" onAction="#txtPercentageOnAction" prefHeight="25.0" prefWidth="147.0" />
       <JFXTextField fx:id="txtMonthlyPremium" layoutX="190.0" layoutY="470.0" prefHeight="25.0" prefWidth="147.0" />
-      <JFXTextField fx:id="txtSearch" labelFloat="true" layoutX="582.0" layoutY="73.0" prefHeight="25.0" prefWidth="466.0" promptText="Loan ID" />
+      <JFXTextField fx:id="txtSearch" labelFloat="true" layoutX="583.0" layoutY="73.0" prefHeight="25.0" prefWidth="466.0" promptText="Loan ID" />
       <Label layoutX="442.0" layoutY="75.0" prefHeight="20.0" prefWidth="132.0" text="Search  Loan -">
          <font>
             <Font name="System Bold Italic" size="14.0" />
