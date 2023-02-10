@@ -1,10 +1,8 @@
 package lk.ijse.microfinance.model;
 
 import lk.ijse.microfinance.db.DBConnection;
-import lk.ijse.microfinance.to.PlaceLoan;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 public class PlaceLoanModel {
     public static boolean placeLoan(String lID,double lAmount) throws SQLException, ClassNotFoundException {

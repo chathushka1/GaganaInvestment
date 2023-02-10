@@ -2,30 +2,17 @@ package lk.ijse.microfinance.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.microfinance.bo.BOFactory;
 import lk.ijse.microfinance.bo.custom.LoanBO;
-import lk.ijse.microfinance.db.DBConnection;
-import lk.ijse.microfinance.model.LoanModel;
-import lk.ijse.microfinance.to.DebtorDTO;
-import lk.ijse.microfinance.to.LoanDTO;
-import lk.ijse.microfinance.view.tm.DebtorAddTm;
+import lk.ijse.microfinance.dto.LoanDTO;
 import lk.ijse.microfinance.view.tm.LoanAddTm;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class LoanController {
     public AnchorPane ancLoan;

@@ -1,8 +1,7 @@
 package lk.ijse.microfinance.bo.custom;
 
 import lk.ijse.microfinance.bo.SuperBO;
-import lk.ijse.microfinance.model.DebtorModel;
-import lk.ijse.microfinance.to.DebtorDTO;
+import lk.ijse.microfinance.dto.DebtorDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

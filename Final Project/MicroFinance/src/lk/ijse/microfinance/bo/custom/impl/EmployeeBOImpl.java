@@ -2,12 +2,9 @@ package lk.ijse.microfinance.bo.custom.impl;
 
 import lk.ijse.microfinance.bo.custom.EmployeeBO;
 import lk.ijse.microfinance.dao.DAOFactory;
-import lk.ijse.microfinance.dao.custom.DebtorDAO;
 import lk.ijse.microfinance.dao.custom.EmployeeDAO;
-import lk.ijse.microfinance.entity.Debtor;
 import lk.ijse.microfinance.entity.Employee;
-import lk.ijse.microfinance.to.DebtorDTO;
-import lk.ijse.microfinance.to.EmployeeDTO;
+import lk.ijse.microfinance.dto.EmployeeDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

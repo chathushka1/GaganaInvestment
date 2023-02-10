@@ -5,23 +5,16 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.microfinance.bo.BOFactory;
-import lk.ijse.microfinance.bo.SuperBO;
 import lk.ijse.microfinance.bo.custom.DebtorBO;
-import lk.ijse.microfinance.db.DBConnection;
-import lk.ijse.microfinance.model.DebtorModel;
-import lk.ijse.microfinance.to.DebtorDTO;
+import lk.ijse.microfinance.dto.DebtorDTO;
 import lk.ijse.microfinance.view.tm.DebtorAddTm;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class DebtorFormController {
 

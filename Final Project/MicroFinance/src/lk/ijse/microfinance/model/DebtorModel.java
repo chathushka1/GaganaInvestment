@@ -1,10 +1,5 @@
 package lk.ijse.microfinance.model;
 
-import lk.ijse.microfinance.to.DebtorDTO;
-import lk.ijse.microfinance.util.CrudUtil;
-
-import java.sql.SQLException;
-
 public class DebtorModel {
    /* public static boolean register(DebtorDTO debtor) throws SQLException, ClassNotFoundException {
 *//*PreparedStatement pstm = DBConnection.getInstance().getConnection()

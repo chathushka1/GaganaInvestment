@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.microfinance.db.DBConnection;
 import lk.ijse.microfinance.model.PaymentModel;
 import lk.ijse.microfinance.model.PlaceLoanModel;
-import lk.ijse.microfinance.to.*;
+import lk.ijse.microfinance.dto.*;
 import lk.ijse.microfinance.view.tm.PaymentAddTm;
 
 import java.sql.Connection;

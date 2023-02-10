@@ -1,4 +1,4 @@
-package lk.ijse.microfinance.to;
+package lk.ijse.microfinance.dto;
 
 import java.util.ArrayList;
 

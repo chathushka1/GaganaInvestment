@@ -1,12 +1,5 @@
 package lk.ijse.microfinance.model;
 
-import lk.ijse.microfinance.db.DBConnection;
-import lk.ijse.microfinance.to.GuarantorDTO;
-import lk.ijse.microfinance.util.CrudUtil;
-
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
 public class GuarantorModel {
    /* public static boolean register(GuarantorDTO guarantor) throws SQLException, ClassNotFoundException {
         PreparedStatement pstm = DBConnection.getInstance().getConnection()

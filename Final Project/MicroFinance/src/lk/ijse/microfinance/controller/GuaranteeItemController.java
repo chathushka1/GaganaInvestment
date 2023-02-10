@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.microfinance.bo.BOFactory;
 import lk.ijse.microfinance.bo.custom.GuaranteeItemBO;
-import lk.ijse.microfinance.to.GuaranteeItemDTO;
+import lk.ijse.microfinance.dto.GuaranteeItemDTO;
 import lk.ijse.microfinance.view.tm.GuaranteeItemAddTm;
 
 import java.sql.SQLException;

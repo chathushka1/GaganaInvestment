@@ -3,10 +3,8 @@ package lk.ijse.microfinance.bo.custom.impl;
 import lk.ijse.microfinance.bo.custom.GuarantorBO;
 import lk.ijse.microfinance.dao.DAOFactory;
 import lk.ijse.microfinance.dao.custom.GuarantorDAO;
-import lk.ijse.microfinance.entity.Debtor;
 import lk.ijse.microfinance.entity.Guarantor;
-import lk.ijse.microfinance.to.DebtorDTO;
-import lk.ijse.microfinance.to.GuarantorDTO;
+import lk.ijse.microfinance.dto.GuarantorDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

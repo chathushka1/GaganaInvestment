@@ -1,8 +1,8 @@
 package lk.ijse.microfinance.model;
 
 import lk.ijse.microfinance.db.DBConnection;
-import lk.ijse.microfinance.to.LoanDTO;
-import lk.ijse.microfinance.to.LoanDetail;
+import lk.ijse.microfinance.dto.LoanDTO;
+import lk.ijse.microfinance.dto.LoanDetail;
 import lk.ijse.microfinance.util.CrudUtil;
 
 import java.sql.PreparedStatement;

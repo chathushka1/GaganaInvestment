@@ -1,11 +1,5 @@
 package lk.ijse.microfinance.model;
 
-import lk.ijse.microfinance.db.DBConnection;
-import lk.ijse.microfinance.to.EmployeeDTO;
-
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
 public class EmployeeModel {
     /*public static boolean register(EmployeeDTO employeeDTO) throws SQLException, ClassNotFoundException {
         PreparedStatement pstm = DBConnection.getInstance().getConnection()

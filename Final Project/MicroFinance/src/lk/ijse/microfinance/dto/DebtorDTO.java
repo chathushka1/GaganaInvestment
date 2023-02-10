@@ -1,4 +1,4 @@
-package lk.ijse.microfinance.to;
+package lk.ijse.microfinance.dto;
 
 public class DebtorDTO {
     private String dID;

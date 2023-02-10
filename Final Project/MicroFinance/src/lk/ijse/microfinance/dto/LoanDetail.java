@@ -1,22 +1,22 @@
-package lk.ijse.microfinance.to;
+package lk.ijse.microfinance.dto;
 
-public class LoanDTO {
+public class LoanDetail {
     private String lID;
     private String dID;
-    private double loanAmount;
+    private double amount;
     private String loanDate;
     private String loanDueDate;
     private int period ;
     private double percentage;
     private double monthlyPremium ;
 
-    public LoanDTO() {
+    public LoanDetail() {
     }
 
-    public LoanDTO(String lID, String dID, double loanAmount, String loanDate, String loanDueDate, int period, double percentage, double monthlyPremium) {
+    public LoanDetail(String lID, String dID, double amount, String loanDate, String loanDueDate, int period, double percentage, double monthlyPremium) {
         this.lID = lID;
         this.dID = dID;
-        this.loanAmount = loanAmount;
+        this.amount = amount;
         this.loanDate = loanDate;
         this.loanDueDate = loanDueDate;
         this.period = period;
@@ -40,12 +40,12 @@ public class LoanDTO {
         this.dID = dID;
     }
 
-    public double getLoanAmount() {
-        return loanAmount;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setLoanAmount(double loanAmount) {
-        this.loanAmount = loanAmount;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
     public String getLoanDate() {
@@ -90,10 +90,10 @@ public class LoanDTO {
 
     @Override
     public String toString() {
-        return "Loan{" +
+        return "LoanDetail{" +
                 "lID='" + lID + '\'' +
                 ", dID='" + dID + '\'' +
-                ", loanAmount=" + loanAmount +
+                ", amount=" + amount +
                 ", loanDate='" + loanDate + '\'' +
                 ", loanDueDate='" + loanDueDate + '\'' +
                 ", period=" + period +
