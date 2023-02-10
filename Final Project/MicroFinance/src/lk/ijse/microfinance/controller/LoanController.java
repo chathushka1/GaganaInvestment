@@ -8,7 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.microfinance.bo.BOFactory;
 import lk.ijse.microfinance.bo.custom.LoanBO;
-import lk.ijse.microfinance.dto.LoanDTO;
+import lk.ijse.microfinance.model.LoanDTO;
 import lk.ijse.microfinance.view.tm.LoanAddTm;
 
 import java.sql.SQLException;

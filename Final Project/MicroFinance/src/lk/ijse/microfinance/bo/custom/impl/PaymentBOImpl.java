@@ -4,7 +4,7 @@ import lk.ijse.microfinance.bo.custom.PaymentBO;
 import lk.ijse.microfinance.dao.DAOFactory;
 import lk.ijse.microfinance.dao.custom.PaymentDAO;
 import lk.ijse.microfinance.entity.Payment;
-import lk.ijse.microfinance.dto.PaymentDTO;
+import lk.ijse.microfinance.model.PaymentDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

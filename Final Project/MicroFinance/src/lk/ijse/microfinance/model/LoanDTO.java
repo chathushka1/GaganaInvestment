@@ -1,4 +1,4 @@
-package lk.ijse.microfinance.dto;
+package lk.ijse.microfinance.model;
 
 public class LoanDTO {
     private String lID;

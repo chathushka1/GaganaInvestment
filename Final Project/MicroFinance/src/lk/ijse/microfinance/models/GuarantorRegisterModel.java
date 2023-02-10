@@ -1,9 +1,4 @@
-package lk.ijse.microfinance.model;
-
-import lk.ijse.microfinance.db.DBConnection;
-
-import java.sql.SQLException;
-import java.time.LocalDate;
+package lk.ijse.microfinance.models;
 
 public class GuarantorRegisterModel {
 

@@ -1,4 +1,4 @@
-package lk.ijse.microfinance.dto;
+package lk.ijse.microfinance.model;
 
 public class GuarantorDTO {
     private String gID ;

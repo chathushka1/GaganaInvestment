@@ -1,7 +1,7 @@
-package lk.ijse.microfinance.model;
+package lk.ijse.microfinance.models;
 
 import lk.ijse.microfinance.db.DBConnection;
-import lk.ijse.microfinance.dto.PaymentDTO;
+import lk.ijse.microfinance.model.PaymentDTO;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

@@ -4,7 +4,7 @@ import lk.ijse.microfinance.bo.custom.GuaranteeItemBO;
 import lk.ijse.microfinance.dao.DAOFactory;
 import lk.ijse.microfinance.dao.custom.GuaranteeItemDAO;
 import lk.ijse.microfinance.entity.GuaranteeItem;
-import lk.ijse.microfinance.dto.GuaranteeItemDTO;
+import lk.ijse.microfinance.model.GuaranteeItemDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

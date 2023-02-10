@@ -1,8 +1,4 @@
-package lk.ijse.microfinance.model;
-
-import lk.ijse.microfinance.db.DBConnection;
-
-import java.sql.SQLException;
+package lk.ijse.microfinance.models;
 
 public class GuarantorItemRegisterModel {
     /*public static boolean placeGuarantorItem(String gItemID,String lId) throws SQLException, ClassNotFoundException {

@@ -4,7 +4,7 @@ import lk.ijse.microfinance.bo.custom.EmployeeBO;
 import lk.ijse.microfinance.dao.DAOFactory;
 import lk.ijse.microfinance.dao.custom.EmployeeDAO;
 import lk.ijse.microfinance.entity.Employee;
-import lk.ijse.microfinance.dto.EmployeeDTO;
+import lk.ijse.microfinance.model.EmployeeDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package lk.ijse.microfinance.model;
+package lk.ijse.microfinance.models;
 
 import lk.ijse.microfinance.db.DBConnection;
 

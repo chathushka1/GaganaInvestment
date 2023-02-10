@@ -1,4 +1,4 @@
-package lk.ijse.microfinance.model;
+package lk.ijse.microfinance.models;
 
 public class DebtorModel {
    /* public static boolean register(DebtorDTO debtor) throws SQLException, ClassNotFoundException {
