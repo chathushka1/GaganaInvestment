@@ -30,7 +30,7 @@
         <Line endX="212.0" layoutX="168.0" layoutY="608.0" startX="-139.0" />
         <Line endX="197.0" endY="-30.0" layoutX="-169.0" layoutY="83.0" startX="197.0" startY="525.0" />
         <JFXTextField fx:id="txtPeriod" labelFloat="true" layoutX="67.0" layoutY="248.0" prefHeight="25.0" prefWidth="268.0" promptText="Period" />
-        <JFXButton layoutX="90.0" layoutY="511.0" onAction="#btnSaveOnAction" prefHeight="39.0" prefWidth="223.0" style="-fx-background-color: #9be39b,        linear-gradient(#d6d6d6 50%, white 100%),        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%); -fx-background-radius: 30; -fx-background-insets: 1,2,2; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );" text="Save ">
+        <JFXButton fx:id="btnSaveId" layoutX="89.0" layoutY="530.0" onAction="#btnSaveOnAction" prefHeight="39.0" prefWidth="223.0" style="-fx-background-color: #9be39b,        linear-gradient(#d6d6d6 50%, white 100%),        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%); -fx-background-radius: 30; -fx-background-insets: 1,2,2; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );" text="Save ">
             <font>
                 <Font size="18.0" />
             </font>
@@ -38,12 +38,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
         </JFXButton>
-      <Label layoutX="67.0" layoutY="410.0" prefHeight="48.0" prefWidth="124.0" text="Percentage -">
+      <Label layoutX="67.0" layoutY="399.0" prefHeight="48.0" prefWidth="124.0" text="Percentage -">
          <font>
             <Font name="ArnoPro-Caption" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="67.0" layoutY="465.0" prefHeight="35.0" prefWidth="154.0" text="Monthly Premium -">
+      <Label layoutX="67.0" layoutY="453.0" prefHeight="35.0" prefWidth="154.0" text="Monthly Premium -">
          <font>
             <Font name="ArnoPro-Caption" size="14.0" />
          </font>
@@ -54,16 +54,8 @@
          </font>
       </Label>
       <JFXTextField fx:id="txtDueDate" labelFloat="true" layoutX="69.0" layoutY="368.0" prefHeight="25.0" prefWidth="268.0" promptText="Deu Date " />
-      <JFXButton layoutX="89.0" layoutY="559.0" onAction="#btnUpdateOnAction" prefHeight="39.0" prefWidth="223.0" style="-fx-background-color: #9be39b,        linear-gradient(#d6d6d6 50%, white 100%),        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%); -fx-background-radius: 30; -fx-background-insets: 1,2,2; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );" text="Update">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
-      <JFXTextField fx:id="txtLoanID" labelFloat="true" layoutX="67.0" layoutY="82.0" prefHeight="25.0" prefWidth="268.0" promptText="Loan ID                                                    * ex - L001" />
-      <JFXTextField fx:id="txtDebtorID" labelFloat="true" layoutX="67.0" layoutY="135.0" prefHeight="25.0" prefWidth="268.0" promptText="Debtor ID                                                * ex - D001" />
+      <JFXTextField fx:id="txtLoanID" labelFloat="true" layoutX="67.0" layoutY="82.0" prefHeight="25.0" prefWidth="268.0" promptText="Loan ID                                             * ex - L00-001" />
+      <JFXTextField fx:id="txtDebtorID" labelFloat="true" layoutX="67.0" layoutY="135.0" prefHeight="25.0" prefWidth="268.0" promptText="Debtor ID                                          * ex - D00-001" />
       <JFXTextField fx:id="txtDate" labelFloat="true" layoutX="69.0" layoutY="315.0" prefHeight="25.0" prefWidth="268.0" promptText="Date " />
       <TableView fx:id="tblLoan" layoutX="410.0" layoutY="308.0" prefHeight="300.0" prefWidth="651.0">
          <columns>
@@ -82,8 +74,8 @@
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtPercentage" layoutX="190.0" layoutY="422.0" onAction="#txtPercentageOnAction" prefHeight="25.0" prefWidth="147.0" />
-      <JFXTextField fx:id="txtMonthlyPremium" layoutX="190.0" layoutY="470.0" prefHeight="25.0" prefWidth="147.0" />
+      <JFXTextField fx:id="txtPercentage" layoutX="190.0" layoutY="410.0" onAction="#txtPercentageOnAction" prefHeight="25.0" prefWidth="147.0" />
+      <JFXTextField fx:id="txtMonthlyPremium" layoutX="190.0" layoutY="453.0" prefHeight="25.0" prefWidth="147.0" />
       <JFXTextField fx:id="txtSearch" labelFloat="true" layoutX="583.0" layoutY="73.0" prefHeight="25.0" prefWidth="466.0" promptText="Loan ID" />
       <Label layoutX="442.0" layoutY="75.0" prefHeight="20.0" prefWidth="132.0" text="Search  Loan -">
          <font>
@@ -114,5 +106,13 @@
             <Font name="ArnoPro-Caption" size="14.0" />
          </font>
       </Label>
+      <JFXButton fx:id="btnNewLoanId" layoutX="89.0" layoutY="488.0" onAction="#btnNewSaveOnAction" prefHeight="39.0" prefWidth="223.0" style="-fx-background-color: #9be39b,        linear-gradient(#d6d6d6 50%, white 100%),        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%); -fx-background-radius: 30; -fx-background-insets: 1,2,2; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );" text="+ New Loan">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
     </children>
 </AnchorPane>

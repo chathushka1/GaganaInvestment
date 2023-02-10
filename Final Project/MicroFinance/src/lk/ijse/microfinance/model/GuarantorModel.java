@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class GuarantorModel {
-    public static boolean register(GuarantorDTO guarantor) throws SQLException, ClassNotFoundException {
+   /* public static boolean register(GuarantorDTO guarantor) throws SQLException, ClassNotFoundException {
         PreparedStatement pstm = DBConnection.getInstance().getConnection()
                 .prepareStatement("INSERT INTO Guarantor VALUES(?,?,?,?,?,?)");
         pstm.setString(1,guarantor.getgID());
@@ -29,5 +29,5 @@ public class GuarantorModel {
 
         return CrudUtil.execute(sql,lID,gID);
 
-    }
+    }*/
 }

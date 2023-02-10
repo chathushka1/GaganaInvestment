@@ -116,7 +116,7 @@ public class GuarantorFormController {
 
         txtGuarantorID.setEditable(false);
         btnNewRegisterID.setDisable(true);
-        btnDeleteID.setDisable(true);
+      //  btnDeleteID.setDisable(true);
 
 
     }
@@ -144,7 +144,7 @@ public class GuarantorFormController {
         String gNic=txtNIC.getText();
         String gTelephone=txtTelephone.getText();
 
-        if (!gName.matches(".*[a-zA-Z0-9]{4,}")) {
+      /*  if (!gName.matches(".*[a-zA-Z0-9]{4,}")) {
             new Alert(Alert.AlertType.ERROR, "Invalid name").show();
             txtName.requestFocus();
 //            txtName.setFocusColor(Paint.valueOf("Red"));
@@ -160,7 +160,7 @@ public class GuarantorFormController {
             new Alert(Alert.AlertType.ERROR, "Contact should be at long").show();
             txtTelephone.requestFocus();
             return;
-        }
+        }*/
         if(btnNewRegisterID.getText().equalsIgnoreCase("Save Guarantor")){
             try {
                 if(exitRegister(gId)){
@@ -218,7 +218,7 @@ public class GuarantorFormController {
 
         txtGuarantorID.setText(genarateNewIDs());
         btnNewRegisterID.setDisable(false);
-        btnNewRegisterID.setText("Save Debtor");
+        btnNewRegisterID.setText("Save Guarantor");
     }
     private boolean exitRegister(String code) throws SQLException, ClassNotFoundException {
         return guarantorBO.existGuarantor(code);

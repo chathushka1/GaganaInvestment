@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 public class GuarantorRegisterModel {
 
-        public static boolean placeGuarantor(String lID,String gID) throws SQLException, ClassNotFoundException {
+       /* public static boolean placeGuarantor(String lID,String gID) throws SQLException, ClassNotFoundException {
             try {
                 DBConnection.getInstance().getConnection().setAutoCommit(false);
                 boolean isOrderAdded = GuarantorModel.save(lID,gID);
@@ -20,6 +20,6 @@ public class GuarantorRegisterModel {
             } finally {
                 DBConnection.getInstance().getConnection().setAutoCommit(true);
             }
-        }
+        }*/
     }
 

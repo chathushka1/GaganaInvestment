@@ -56,8 +56,8 @@
         <Line endX="197.0" endY="-29.0" layoutX="184.0" layoutY="83.0" startX="197.0" startY="524.0" />
         <Line endX="213.0" layoutX="168.0" layoutY="608.0" startX="-139.0" />
         <Line endX="197.0" endY="-30.0" layoutX="-169.0" layoutY="83.0" startX="197.0" startY="525.0" />
-      <JFXTextField fx:id="txtGuarantorID" labelFloat="true" layoutX="67.0" layoutY="86.0" prefHeight="25.0" prefWidth="268.0" promptText="Guarantor Id                                           *  ex - G001" />
-      <JFXTextField fx:id="txtLoanID" labelFloat="true" layoutX="68.0" layoutY="145.0" prefHeight="25.0" prefWidth="268.0" promptText="Loan ID                                                   *  ex - L001" />
+      <JFXTextField fx:id="txtGuarantorID" labelFloat="true" layoutX="67.0" layoutY="86.0" prefHeight="25.0" prefWidth="268.0" promptText="Guarantor Id                                     *  ex - G00-001" />
+      <JFXTextField fx:id="txtLoanID" labelFloat="true" layoutX="68.0" layoutY="145.0" prefHeight="25.0" prefWidth="268.0" promptText="Loan ID                                             *  ex - L00-001" />
       <TableView fx:id="tblGuarantor" layoutX="410.0" layoutY="308.0" prefHeight="301.0" prefWidth="651.0">
          <columns>
             <TableColumn fx:id="collGuarantorID" minWidth="1.0" prefWidth="98.0" text="Guarantor ID" />

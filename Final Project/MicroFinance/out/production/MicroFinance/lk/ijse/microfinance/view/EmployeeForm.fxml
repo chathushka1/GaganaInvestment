@@ -57,7 +57,7 @@
         <Line endX="213.0" layoutX="168.0" layoutY="608.0" startX="-139.0" />
         <Line endX="197.0" endY="-30.0" layoutX="-169.0" layoutY="83.0" startX="197.0" startY="525.0" />
         <JFXTextField fx:id="txtPosition" labelFloat="true" layoutX="71.0" layoutY="343.0" prefHeight="25.0" prefWidth="268.0" promptText="Position" />
-      <JFXTextField fx:id="txteID" labelFloat="true" layoutX="71.0" layoutY="98.0" prefHeight="25.0" prefWidth="268.0" promptText="Employee ID                                           * ex - E001" />
+      <JFXTextField fx:id="txteID" labelFloat="true" layoutX="71.0" layoutY="98.0" prefHeight="25.0" prefWidth="268.0" promptText="Employee ID                                      * ex - E00-001" />
       <TableView fx:id="tblEmployee" layoutX="412.0" layoutY="301.0" prefHeight="300.0" prefWidth="651.0">
          <columns>
             <TableColumn fx:id="collEmployeeID" minWidth="1.0" prefWidth="95.0" text="Employee ID" />

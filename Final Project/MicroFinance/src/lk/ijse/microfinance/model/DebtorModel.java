@@ -6,8 +6,8 @@ import lk.ijse.microfinance.util.CrudUtil;
 import java.sql.SQLException;
 
 public class DebtorModel {
-    public static boolean register(DebtorDTO debtor) throws SQLException, ClassNotFoundException {
-/*PreparedStatement pstm = DBConnection.getInstance().getConnection()
+   /* public static boolean register(DebtorDTO debtor) throws SQLException, ClassNotFoundException {
+*//*PreparedStatement pstm = DBConnection.getInstance().getConnection()
                 .prepareStatement("INSERT INTO Customer VALUES(?, ?, ?, ?)");
         pstm.setString(1, customer.getId());
         pstm.setString(2, customer.getName());
@@ -17,7 +17,7 @@ public class DebtorModel {
         return pstm.executeUpdate() > 0;
         String sql = "INSERT INTO Customer VALUES (?, ?, ?, ?)";
         return CrudUtil.execute(sql, customer.getId(), customer.getName(), customer.getAddress(), customer.getSalary());
-*/
+*//*
 //        PreparedStatement pstm = DBConnection.getInstance().getConnection()
 //                .prepareStatement("INSERT INTO Debtor VALUES(?,?,?,?,?,?,?)");
 //        pstm.setString(1,debtor.getdID());
@@ -32,5 +32,5 @@ public class DebtorModel {
 
         String sql = "INSERT INTO Debtor VALUES(?,?,?,?,?,?,?)";
         return CrudUtil.execute(sql,debtor.getdID(),debtor.getName(),debtor.getAddress(),debtor.getNic(),debtor.getAmountDeu(),debtor.getTelephone(),debtor.getEmployeeId());
-    }
+    }*/
 }

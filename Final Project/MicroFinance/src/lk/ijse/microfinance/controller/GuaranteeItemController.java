@@ -2,60 +2,43 @@ package lk.ijse.microfinance.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.microfinance.bo.BOFactory;
 import lk.ijse.microfinance.bo.custom.GuaranteeItemBO;
-import lk.ijse.microfinance.db.DBConnection;
-import lk.ijse.microfinance.model.GuaranteeItemModel;
-import lk.ijse.microfinance.to.DebtorDTO;
 import lk.ijse.microfinance.to.GuaranteeItemDTO;
-import lk.ijse.microfinance.to.GuarantorDTO;
-import lk.ijse.microfinance.view.tm.DebtorAddTm;
 import lk.ijse.microfinance.view.tm.GuaranteeItemAddTm;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class GuaranteeItemController {
-
     public AnchorPane ancGuaranteeItem;
+    public ImageView btnNewRegisterID;
+    public JFXTextField txtName;
+    public JFXButton btnRegisterID;
+    public JFXButton btnDeleteID;
     public JFXTextField txtValivation;
     public JFXTextField txtItemID;
     public JFXTextField txtLoanID;
-    public TableView<GuaranteeItemAddTm> tblGuaranteeItem;
-    public TableColumn<GuaranteeItemAddTm, String> collLoanID;
-    public TableColumn<GuaranteeItemAddTm, String> collName;
-    public TableColumn<GuaranteeItemAddTm, Double> collValivation;
-    public JFXTextField txtName;
-    public JFXTextField txtSearch;
+    public TableView <GuaranteeItemAddTm>tblGuaranteeItem;
     public TableColumn<GuaranteeItemAddTm, String> collId;
+    public TableColumn collLoanID;
+    public TableColumn collName;
+    public TableColumn collValivation;
+    public JFXTextField txtSearch;
     public Label lblItemID;
     public Label lblLoanId;
     public Label lblName;
     public Label lblValivation;
-    public JFXButton btnRegisterID;
-    public JFXButton btnDeleteID;
-    public JFXButton btnNewRegisterID;
+    public JFXButton btnAddNewItemId;
     private String searchText = "";
-    private Matcher gItemIdMatcher;
-    private Matcher gILoanIdMatcher;
-    private Matcher gINameMatcher;
-    private Matcher gIValivationMatcher;
+
     GuaranteeItemBO guaranteeItemBO = (GuaranteeItemBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.GUARANTEEITEMBO);
-
-
     public void initialize() {
         collId.setCellValueFactory(new PropertyValueFactory<>("id"));
         collLoanID.setCellValueFactory(new PropertyValueFactory<>("loanId"));
@@ -83,12 +66,9 @@ public class GuaranteeItemController {
             }
         });
 
-        txtItemID.setOnAction(event -> btnRegisterID.fire());
+        txtValivation.setOnAction(event -> btnRegisterID.fire());
         loadAllGItem();
-
-
     }
-
     public void initUI() {
         txtItemID.clear();
         txtLoanID.clear();
@@ -105,7 +85,6 @@ public class GuaranteeItemController {
         btnDeleteID.setDisable(true);
 
     }
-
     private void loadAllGItem() {
         try {
             guaranteeItemBO.gelAllGItem();
@@ -120,22 +99,32 @@ public class GuaranteeItemController {
             e.printStackTrace();
         }
     }
+    public void btnGenarateNewIdOnAction(ActionEvent actionEvent) {
 
-    public void btnRegisterOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        String gItemID = txtItemID.getId();
+
+        txtItemID.clear();
+        txtLoanID.clear();
+        txtName.clear();
+        txtValivation.clear();
+
+        txtItemID.setText(genarateNewIDS());
+
+        txtItemID.setDisable(false);
+        txtLoanID.setDisable(false);
+        txtName.setDisable(false);
+        txtValivation.setDisable(false);
+
+        btnRegisterID.setDisable(false);
+        btnRegisterID.setText("Save GuaranteeItem");
+
+    }
+
+    public void btnRegisterOnAction(ActionEvent actionEvent) {
+        String gItemID = txtItemID.getText();
         String lID = txtLoanID.getText();
         String name = txtName.getText();
         double valivation = Double.parseDouble(txtValivation.getText());
 
-       /* if (!name.matches(".*[a-zA-Z0-9]{4,}")) {
-            new Alert(Alert.AlertType.ERROR, "Invalid name").show();
-            txtName.requestFocus();
-//            txtName.setFocusColor(Paint.valueOf("Red"));
-            return;
-        } else if(!txtValivation.getText().matches(".*[0-9]{4,}")){
-            new Alert(Alert.AlertType.ERROR, "Valivation should not ").show();
-            txtValivation.requestFocus();
-        }*/
         if (btnRegisterID.getText().equalsIgnoreCase("Save GuaranteeItem")) {
             try {
                 if (exitRegister(gItemID)) {
@@ -172,7 +161,7 @@ public class GuaranteeItemController {
             }
 
         }
-        btnNewRegisterID.fire();
+         btnAddNewItemId.fire();
 
 
     }
@@ -180,24 +169,6 @@ public class GuaranteeItemController {
     private boolean exitRegister(String code) throws SQLException, ClassNotFoundException {
         return guaranteeItemBO.existGItem(code);
     }
-
-    public void btnUpdateOnAction(ActionEvent actionEvent) {
-        txtItemID.setDisable(false);
-        txtLoanID.setDisable(false);
-        txtName.setDisable(false);
-        txtValivation.setDisable(false);
-
-        txtItemID.clear();
-        txtLoanID.clear();
-        txtName.clear();
-        txtValivation.clear();
-
-        txtItemID.setText(genarateNewIDS());
-        btnRegisterID.setDisable(false);
-        btnRegisterID.setText("Save GuaranteeItem");
-
-    }
-
     private String genarateNewIDS() {
         try {
             return guaranteeItemBO.genaRateNewId();
@@ -209,7 +180,6 @@ public class GuaranteeItemController {
         return "I00-001";
 
     }
-
     public void btnDeleteOnAction(ActionEvent actionEvent) {
         String id = tblGuaranteeItem.getSelectionModel().getSelectedItem().getId();
 
@@ -220,7 +190,7 @@ public class GuaranteeItemController {
                 guaranteeItemBO.deleteGItem(id);
                 tblGuaranteeItem.getItems().remove(tblGuaranteeItem.getSelectionModel().getSelectedItem());
                 tblGuaranteeItem.getSelectionModel().clearSelection();
-                initUI();
+                 initUI();
             } catch (SQLException e) {
 
             } catch (ClassNotFoundException e) {

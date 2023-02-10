@@ -77,7 +77,7 @@
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font></Label>
-      <JFXTextField fx:id="txtDebtorID" labelFloat="true" layoutX="70.0" layoutY="69.0" prefHeight="25.0" prefWidth="268.0" promptText="Debtor ID                                               *  ex - D001" />
+      <JFXTextField fx:id="txtDebtorID" labelFloat="true" layoutX="70.0" layoutY="69.0" prefHeight="25.0" prefWidth="268.0" promptText="Debtor ID                                         *  ex - D00-001" />
       <JFXTextField fx:id="txtSearch" labelFloat="true" layoutX="574.0" layoutY="68.0" prefHeight="25.0" prefWidth="466.0" promptText="Name, Address, Nic" />
       <Label layoutX="442.0" layoutY="74.0" prefHeight="20.0" prefWidth="132.0" text="Search  Debtor- ">
          <font>
@@ -123,7 +123,7 @@
             <Font name="ArnoPro-BoldCaption" size="12.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtEmployeeID" labelFloat="true" layoutX="70.0" layoutY="122.0" prefHeight="25.0" prefWidth="268.0" promptText="Employee ID                                            *ex - E001" />
+      <JFXTextField fx:id="txtEmployeeID" labelFloat="true" layoutX="70.0" layoutY="122.0" prefHeight="25.0" prefWidth="268.0" promptText="Employee ID                                       *ex - E00-001" />
       <Label fx:id="lblEmployeeID" layoutX="71.0" layoutY="148.0" prefHeight="25.0" prefWidth="268.0" textFill="RED">
          <font>
             <Font name="ArnoPro-BoldCaption" size="12.0" />

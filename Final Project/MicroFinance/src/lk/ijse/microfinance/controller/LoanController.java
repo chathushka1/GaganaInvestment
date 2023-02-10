@@ -1,13 +1,11 @@
 package lk.ijse.microfinance.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -15,7 +13,9 @@ import lk.ijse.microfinance.bo.BOFactory;
 import lk.ijse.microfinance.bo.custom.LoanBO;
 import lk.ijse.microfinance.db.DBConnection;
 import lk.ijse.microfinance.model.LoanModel;
+import lk.ijse.microfinance.to.DebtorDTO;
 import lk.ijse.microfinance.to.LoanDTO;
+import lk.ijse.microfinance.view.tm.DebtorAddTm;
 import lk.ijse.microfinance.view.tm.LoanAddTm;
 
 import java.sql.Connection;
@@ -23,6 +23,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,11 +53,14 @@ public class LoanController {
     public Label lblPeriod;
     public Label lblDebtorId;
     public JFXTextField txtLoanAmount;
-    private String searchText ="";
+    public JFXButton btnSaveId;
+    public JFXButton btnUpdateId;
+    public JFXButton btnNewLoanId;
+    private String searchText = "";
     LoanBO loanBO = (LoanBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.LOANBO);
 
 
-    public void initialize(){
+    public void initialize() {
         collLoanID.setCellValueFactory(new PropertyValueFactory<>("id"));
         collDebtorID.setCellValueFactory(new PropertyValueFactory<>("idDebtor"));
         collAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
@@ -66,55 +70,91 @@ public class LoanController {
         collPercentage.setCellValueFactory(new PropertyValueFactory<>("percentage"));
         collMonthlyPremium.setCellValueFactory(new PropertyValueFactory<>("monthlyPremium"));
 
-        initUI();
+
         tblLoan.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            btnDeleteId.setDisable(newValue==null);
-            btnRegisterID.setText(newValue!=null?"update":"save");
-            btnRegisterID.setDisable(newValue==null);
+            btnUpdateId.setDisable(newValue == null);
+            btnSaveId.setText(newValue != null ? "update" : "save");
 
-            if(newValue!=null){
-                txtDebtorID.setText(newValue.getId());
-                txtName.setText(newValue.getName());
-                txtAddress.setText(newValue.getAddress());
-                txtNIC.setText(newValue.getNic());
-                txtLoanAmount.setText(String.valueOf(newValue.getAmountDeu()));
-                txtTelephone.setText(newValue.getTelephone());
-                txtEmployeeID.setText(newValue.getEmployeeId());
 
+            if (newValue != null) {
+                txtLoanID.setText(newValue.getId());
+                txtDebtorID.setText(newValue.getIdDebtor());
+                txtAmount.setText(String.valueOf(newValue.getAmount()));
+                txtDate.setText(newValue.getLoanDate());
+                txtDueDate.setText(newValue.getLoanDueDate());
+                txtPeriod.setText(String.valueOf(newValue.getPeriod()));
+                txtPercentage.setText(String.valueOf(newValue.getPercentage()));
+                txtMonthlyPremium.setText(String.valueOf(newValue.getMonthlyPremium()));
+
+                txtLoanID.setDisable(false);
                 txtDebtorID.setDisable(false);
-                txtName.setDisable(false);
-                txtAddress.setDisable(false);
-                txtNIC.setDisable(false);
-                txtLoanAmount.setDisable(false);
-                txtTelephone.setDisable(false);
-                txtEmployeeID.setDisable(false);
+                txtAmount.setDisable(false);
+                txtDate.setDisable(false);
+                txtDueDate.setDisable(false);
+                txtPeriod.setDisable(false);
+                txtPercentage.setDisable(false);
+                txtMonthlyPremium.setDisable(false);
+
 
             }
         });
 
-        txtLoanID.setOnAction(event -> btnRegisterID.fire());
-        loadAllDebtor();
-
-
-
+        loadAllLoan();
 
     }
 
-    private void AddLoanTbl(String text) {
-    }
+    private void loadAllLoan() {
+        try {
+            loanBO.gelAllLoan();
+            ArrayList<LoanDTO> allLoan = loanBO.gelAllLoan();
+            for (LoanDTO dto : allLoan) {
+                tblLoan.getItems().add(new LoanAddTm(dto.getlID(), dto.getdID(), dto.getLoanAmount(), dto.getLoanDate(), dto.getLoanDueDate(),
+                        dto.getPeriod(), dto.getPercentage(), dto.getMonthlyPremium()));
+            }
 
+        } catch (SQLException e) {
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
+        // String dID = txtDebtorID.getText();
+        String lID = txtLoanID.getText();
+        String dID =txtDebtorID.getText();
+        double amount = Double.parseDouble(txtLoanAmount.getText());
+        String loanDate = txtDate.getText();
+        String loanDueDate =txtDueDate.getText();
+        int period = Integer.parseInt(txtPeriod.getText());
+        double percentage = Double.parseDouble(txtPercentage.getText());
+        double monthlyPremium= Double.parseDouble(txtMonthlyPremium.getText());
+
+        try {
+            if(exitRegister(lID)){
+                new Alert(Alert.AlertType.ERROR,lID+"Allready Register").show();
+
+            }
+            loanBO.addLoan(new LoanDTO(lID,dID,amount,loanDate,loanDueDate,period,percentage,monthlyPremium));
+            tblLoan.getItems().add(new LoanAddTm(lID,dID,amount,loanDate,loanDueDate,period,percentage,monthlyPremium));
+
+        }
+        catch (SQLException e){
+            new Alert(Alert.AlertType.ERROR,lID+"Failed").show();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
     }
 
-
-    public void btnUpdateOnAction(ActionEvent actionEvent) {
+    private boolean exitRegister(String code) throws SQLException, ClassNotFoundException {
+        return loanBO.existLoan(code);
     }
+
     private String genarateNewIDs() {
-        try{
+        try {
             return loanBO.genaRateNewId();
-        }catch (SQLException e){
+        } catch (SQLException e) {
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -124,5 +164,19 @@ public class LoanController {
     }
 
     public void btnNewSaveOnAction(ActionEvent actionEvent) {
+        txtLoanID.setText(genarateNewIDs());
+
     }
+    public void txtPercentageOnAction(ActionEvent actionEvent) {
+        double amount = Double.parseDouble(txtLoanAmount.getText());
+        int period  = Integer.parseInt(txtPeriod.getText());
+        double precentage = Double.parseDouble(txtPercentage.getText());
+
+        double temp =(double) (amount*precentage*0.01)/period;
+
+        double premium =(amount/period)+temp;
+
+        txtMonthlyPremium.setText(String.valueOf(premium));
+    }
+
 }

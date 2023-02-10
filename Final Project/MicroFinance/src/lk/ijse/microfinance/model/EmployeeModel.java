@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class EmployeeModel {
-    public static boolean register(EmployeeDTO employeeDTO) throws SQLException, ClassNotFoundException {
+    /*public static boolean register(EmployeeDTO employeeDTO) throws SQLException, ClassNotFoundException {
         PreparedStatement pstm = DBConnection.getInstance().getConnection()
                 .prepareStatement("INSERT INTO Employee VALUES(?,?,?,?,?,?)");
         pstm.setString(1, employeeDTO.geteID());
@@ -20,6 +20,6 @@ public class EmployeeModel {
 
         return pstm.executeUpdate()>0 ;
 
-    }
+    }*/
 
 }

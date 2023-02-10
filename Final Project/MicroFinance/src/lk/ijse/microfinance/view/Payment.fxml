@@ -55,7 +55,7 @@
             <Font name="ArnoPro-BoldCaption" size="18.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtPaymentID" labelFloat="true" layoutX="71.0" layoutY="98.0" prefHeight="25.0" prefWidth="268.0" promptText="Payment ID                                              * ex - P001">
+      <JFXTextField fx:id="txtPaymentID" labelFloat="true" layoutX="71.0" layoutY="98.0" prefHeight="25.0" prefWidth="268.0" promptText="Payment ID                                         * ex - P00-001">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></JFXTextField>
@@ -102,7 +102,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXTextField fx:id="txtLoanId" labelFloat="true" layoutX="73.0" layoutY="181.0" prefHeight="25.0" prefWidth="268.0" promptText="Loan Id                                                    * ex - L001">
+      <JFXTextField fx:id="txtLoanId" labelFloat="true" layoutX="73.0" layoutY="181.0" prefHeight="25.0" prefWidth="268.0" promptText="Loan Id                                               * ex - L00-001">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
